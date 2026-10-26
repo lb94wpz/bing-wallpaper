@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2018-09 必应壁纸</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0a0a0a;color:#e4e4e7}
+    a{color:#a1a1aa;text-decoration:none}a:hover{color:#fafafa}
+
+    .nav{padding:20px clamp(16px,4vw,48px);max-width:1400px;margin:0 auto}
+    .nav a{font-size:.85rem;color:#52525b;transition:color .2s}.nav a:hover{color:#fafafa}
+
+    .section{max-width:1400px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 60px}
+    .section h1{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:#fafafa;margin-bottom:8px}
+    .section .count{font-size:.85rem;color:#52525b;margin-bottom:32px;display:block}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+    .card{position:relative;border-radius:10px;overflow:hidden;cursor:pointer;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s}
+    .card.visible{opacity:1;transform:translateY(0)}
+    .card img{width:100%;display:block;transition:transform .4s}
+    .card:hover img{transform:scale(1.05)}
+    .card .overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,10,10,.8) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:16px;opacity:0;transition:opacity .3s}
+    .card:hover .overlay{opacity:1}
+    .card .overlay .card-title{font-size:.95rem;font-weight:500;color:#fafafa}
+    .card .overlay .card-date{font-size:.8rem;color:#a1a1aa;margin-top:4px}
+
+    .lightbox{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);align-items:center;justify-content:center;cursor:zoom-out}
+    .lightbox.active{display:flex}
+    .lightbox img{max-width:92vw;max-height:88vh;object-fit:contain;border-radius:4px}
+    .lightbox .lb-info{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);text-align:center;color:#a1a1aa}
+    .lightbox .lb-info .lb-title{font-size:1rem;color:#fafafa;margin-bottom:4px}
+    .lightbox .lb-info .lb-meta{font-size:.8rem;color:#71717a}
+    .lightbox .lb-close{position:absolute;top:24px;right:24px;width:40px;height:40px;background:#18181b;border:1px solid #27272a;border-radius:50%;color:#a1a1aa;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .lightbox .lb-close:hover{background:#27272a;color:#fafafa}
+    .lightbox .lb-download{position:absolute;top:24px;right:80px;padding:8px 20px;background:#fafafa;color:#0a0a0a;border-radius:6px;font-size:.85rem;font-weight:500;cursor:pointer;text-decoration:none;transition:all .2s}
+    .lightbox .lb-download:hover{background:#d4d4d8}
+    .lightbox .lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;background:rgba(24,24,27,.7);border:1px solid #3f3f46;border-radius:50%;color:#a1a1aa;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .lightbox .lb-nav:hover{background:#27272a;color:#fafafa}
+    .lightbox .lb-prev{left:20px}
+    .lightbox .lb-next{right:20px}
+
+    @media(max-width:640px){
+      .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+      .card .overlay{opacity:1;background:linear-gradient(0deg,rgba(10,10,10,.7) 0%,transparent 40%)}
+      .lightbox .lb-nav{width:40px;height:40px;font-size:1.1rem}
+      .lightbox .lb-prev{left:8px}
+      .lightbox .lb-next{right:8px}
+    }
+  </style>
+</head>
+<body>
+  <div class="nav"><a href="/">← 返回首页</a></div>
+  <div class="section">
+    <h1>2018-09 必应壁纸</h1>
+    <span class="count">20 张壁纸</span>
+    <div class="grid">
+      <div class="card" onclick="openLightbox(0)">
+        <img src="https://www.bing.com/th?id=OHR.TheLongWalk_EN-AU11094733779_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="戈尔韦港" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">戈尔韦港</span>
+          <span class="card-date">2018-09-30</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(1)">
+        <img src="https://www.bing.com/th?id=OHR.GoldBridge_EN-AU5579326717_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="“如来大手”托起的金桥" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">“如来大手”托起的金桥</span>
+          <span class="card-date">2018-09-29</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(2)">
+        <img src="https://www.bing.com/th?id=OHR.SouthernRightFlukes_EN-AU12069113412_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="南非海岸附近的南露脊鲸" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">南非海岸附近的南露脊鲸</span>
+          <span class="card-date">2018-09-28</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(3)">
+        <img src="https://www.bing.com/th?id=OHR.Shipyard_EN-AU13311426310_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="夜色下停靠在开普敦港口的轮船" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">夜色下停靠在开普敦港口的轮船</span>
+          <span class="card-date">2018-09-27</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(4)">
+        <img src="https://www.bing.com/th?id=OHR.JacobHashimoto_EN-AU8083666733_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="圣科尼利厄斯教堂内的艺术装置'The Eclipse'" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">圣科尼利厄斯教堂内的艺术装置'The Eclipse'</span>
+          <span class="card-date">2018-09-26</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(5)">
+        <img src="https://www.bing.com/th?id=OHR.GiantSequoia_EN-AU11110971924_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="巨杉国家公园内的巨杉" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">巨杉国家公园内的巨杉</span>
+          <span class="card-date">2018-09-25</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(6)">
+        <img src="https://www.bing.com/th?id=OHR.QinhuaiRiver_EN-AU9821103929_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="【今日中秋节】桨声灯影里的秦淮河" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">【今日中秋节】桨声灯影里的秦淮河</span>
+          <span class="card-date">2018-09-24</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(7)">
+        <img src="https://www.bing.com/th?id=OHR.ShenandoahAutumn_EN-AU11784755049_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="位于蓝岭山脉的雪兰多国家公园" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">位于蓝岭山脉的雪兰多国家公园</span>
+          <span class="card-date">2018-09-23</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(8)">
+        <img src="https://www.bing.com/th?id=OHR.MunichTuba_EN-AU7797561799_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="慕尼黑啤酒节期间反映在法国号喇叭上的游行的人群" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">慕尼黑啤酒节期间反映在法国号喇叭上的游行的人群</span>
+          <span class="card-date">2018-09-22</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(9)">
+        <img src="https://www.bing.com/th?id=OHR.ImaginePeace_EN-AU12572046001_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="梦想和平塔" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">梦想和平塔</span>
+          <span class="card-date">2018-09-21</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(10)">
+        <img src="https://www.bing.com/th?id=OHR.BlackpoolTowerBallroom_EN-AU8455917047_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="布莱克浦塔内的舞厅" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">布莱克浦塔内的舞厅</span>
+          <span class="card-date">2018-09-20</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(11)">
+        <img src="https://www.bing.com/th?id=OHR.DriftwoodPirate_EN-AU11949090819_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="新布莱顿海滩的浮木海盗船" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">新布莱顿海滩的浮木海盗船</span>
+          <span class="card-date">2018-09-19</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(12)">
+        <img src="https://www.bing.com/th?id=OHR.CalidrisCanutus_EN-AU8947402764_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="在设得兰群岛觅食的红腹滨鹬" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">在设得兰群岛觅食的红腹滨鹬</span>
+          <span class="card-date">2018-09-18</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(13)">
+        <img src="https://www.bing.com/th?id=OHR.RedMapleQue_EN-AU8415499769_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="彩色池里的红色枫叶" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">彩色池里的红色枫叶</span>
+          <span class="card-date">2018-09-17</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(14)">
+        <img src="https://www.bing.com/th?id=OHR.MonumentFountain_EN-AU10536043652_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="革命纪念碑" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">革命纪念碑</span>
+          <span class="card-date">2018-09-16</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(15)">
+        <img src="https://www.bing.com/th?id=OHR.BlackCuillin_EN-AU10456249435_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="俯瞰苏格兰的斯凯岛" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">俯瞰苏格兰的斯凯岛</span>
+          <span class="card-date">2018-09-15</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(16)">
+        <img src="https://www.bing.com/th?id=OHR.GustavKlimt_EN-AU9730106413_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="光之工坊数字化艺术中心内古斯塔夫·克里姆特的展览" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">光之工坊数字化艺术中心内古斯塔夫·克里姆特的展览</span>
+          <span class="card-date">2018-09-14</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(17)">
+        <img src="https://www.bing.com/th?id=OHR.BurgundyVineyards_EN-AU11440624167_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="法国勃艮第的葡萄园" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">法国勃艮第的葡萄园</span>
+          <span class="card-date">2018-09-13</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(18)">
+        <img src="https://www.bing.com/th?id=OHR.BlackBrowed_EN-AU10938591456_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="回到福克兰群岛的黑眉信天翁" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">回到福克兰群岛的黑眉信天翁</span>
+          <span class="card-date">2018-09-12</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(19)">
+        <img src="https://www.bing.com/th?id=OHR.ShinjukuKiku_EN-AU9146476128_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="管物菊" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">管物菊</span>
+          <span class="card-date">2018-09-11</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lb-close" onclick="closeLightbox()" aria-label="关闭">&times;</button>
+    <a class="lb-download" id="lb-download" href="#" target="_blank" rel="noopener" onclick="event.stopPropagation()">查看原图</a>
+    <button class="lb-nav lb-prev" onclick="event.stopPropagation();navigate(-1)" aria-label="上一张">&#8249;</button>
+    <button class="lb-nav lb-next" onclick="event.stopPropagation();navigate(1)" aria-label="下一张">&#8250;</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-info">
+      <div class="lb-title" id="lb-title"></div>
+      <div class="lb-meta" id="lb-meta"></div>
+    </div>
+  </div>
+
+  <script>
+    const items=[{"url":"https://www.bing.com/th?id=OHR.TheLongWalk_EN-AU11094733779_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"戈尔韦港","date":"2018-09-30","cr":"戈尔韦港，爱尔兰戈尔韦 (© ClaudineVM/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.GoldBridge_EN-AU5579326717_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"“如来大手”托起的金桥","date":"2018-09-29","cr":"“如来大手”托起的金桥，越南岘港 (© REUTERS/Kham TPX)"},{"url":"https://www.bing.com/th?id=OHR.SouthernRightFlukes_EN-AU12069113412_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"南非海岸附近的南露脊鲸","date":"2018-09-28","cr":"南非海岸附近的南露脊鲸 (© oversnap/E+/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.Shipyard_EN-AU13311426310_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"夜色下停靠在开普敦港口的轮船","date":"2018-09-27","cr":"夜色下停靠在开普敦港口的轮船，南非开普敦 (© Zero Creatives/Science Photo Library)"},{"url":"https://www.bing.com/th?id=OHR.JacobHashimoto_EN-AU8083666733_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"圣科尼利厄斯教堂内的艺术装置'The Eclipse'","date":"2018-09-26","cr":"圣科尼利厄斯教堂内的艺术装置'The Eclipse' ，美国纽约市总督岛  (© Timothy Schenck/Jacob Hashimoto Studio)"},{"url":"https://www.bing.com/th?id=OHR.GiantSequoia_EN-AU11110971924_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"巨杉国家公园内的巨杉","date":"2018-09-25","cr":"巨杉国家公园内的巨杉，美国加利福尼亚州 (© Yva Momatiuk and John Eastcott/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.QinhuaiRiver_EN-AU9821103929_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"【今日中秋节】桨声灯影里的秦淮河","date":"2018-09-24","cr":"【今日中秋节】桨声灯影里的秦淮河，中国南京 (© zyxeos30/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.ShenandoahAutumn_EN-AU11784755049_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"位于蓝岭山脉的雪兰多国家公园","date":"2018-09-23","cr":"位于蓝岭山脉的雪兰多国家公园，美国弗吉尼亚州 (© Rachid Dahnoun/Tandem Stills + Motion)"},{"url":"https://www.bing.com/th?id=OHR.MunichTuba_EN-AU7797561799_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"慕尼黑啤酒节期间反映在法国号喇叭上的游行的人群","date":"2018-09-22","cr":"慕尼黑啤酒节期间反映在法国号喇叭上的游行的人群，德国慕尼黑 (© Joerg Koch/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.ImaginePeace_EN-AU12572046001_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"梦想和平塔","date":"2018-09-21","cr":"梦想和平塔，冰岛雷克雅未克 (© Arctic Images/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.BlackpoolTowerBallroom_EN-AU8455917047_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"布莱克浦塔内的舞厅","date":"2018-09-20","cr":"布莱克浦塔内的舞厅，英国兰开夏郡 (© Dosfotos/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.DriftwoodPirate_EN-AU11949090819_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"新布莱顿海滩的浮木海盗船","date":"2018-09-19","cr":"新布莱顿海滩的浮木海盗船，英国沃勒西 (© Phil Noble/Reuters)"},{"url":"https://www.bing.com/th?id=OHR.CalidrisCanutus_EN-AU8947402764_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"在设得兰群岛觅食的红腹滨鹬","date":"2018-09-18","cr":"在设得兰群岛觅食的红腹滨鹬，苏格兰 (© Andrew Parkinson/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.RedMapleQue_EN-AU8415499769_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"彩色池里的红色枫叶","date":"2018-09-17","cr":"彩色池里的红色枫叶，加拿大魁北克省 (© Gilles Delisle/Jaynes Gallery/DanitaDelimont.com)"},{"url":"https://www.bing.com/th?id=OHR.MonumentFountain_EN-AU10536043652_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"革命纪念碑","date":"2018-09-16","cr":"革命纪念碑，墨西哥墨西哥城 (© Reinier Snijders/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.BlackCuillin_EN-AU10456249435_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"俯瞰苏格兰的斯凯岛","date":"2018-09-15","cr":"俯瞰苏格兰的斯凯岛 (© Swen_Stroop/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.GustavKlimt_EN-AU9730106413_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"光之工坊数字化艺术中心内古斯塔夫·克里姆特的展览","date":"2018-09-14","cr":"光之工坊数字化艺术中心内古斯塔夫·克里姆特的展览 (© Thierry Chesnot/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.BurgundyVineyards_EN-AU11440624167_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"法国勃艮第的葡萄园","date":"2018-09-13","cr":"法国勃艮第的葡萄园 (© Hans Strand/plainpicture)"},{"url":"https://www.bing.com/th?id=OHR.BlackBrowed_EN-AU10938591456_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"回到福克兰群岛的黑眉信天翁","date":"2018-09-12","cr":"回到福克兰群岛的黑眉信天翁 (© Cultura RM/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.ShinjukuKiku_EN-AU9146476128_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"管物菊","date":"2018-09-11","cr":"管物菊，日本东京都新宿区 (© I love Photo and Apple./Getty images)"}];
+    let currentIndex=0;
+
+    function openLightbox(index){
+      currentIndex=index;
+      const w=items[index];
+      document.getElementById('lb-img').src=w.url;
+      document.getElementById('lb-title').textContent=w.title;
+      document.getElementById('lb-meta').textContent=w.date+' · '+w.cr;
+      document.getElementById('lb-download').href=w.url;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow='hidden';
+    }
+    function navigate(dir){
+      currentIndex=(currentIndex+dir+items.length)%items.length;
+      const w=items[currentIndex];
+      document.getElementById('lb-img').src=w.url;
+      document.getElementById('lb-title').textContent=w.title;
+      document.getElementById('lb-meta').textContent=w.date+' · '+w.cr;
+      document.getElementById('lb-download').href=w.url;
+    }
+    function closeLightbox(){
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow='';
+    }
+    document.addEventListener('keydown',e=>{
+      if(e.key==='Escape')closeLightbox();
+      if(e.key==='ArrowLeft')navigate(-1);
+      if(e.key==='ArrowRight')navigate(1);
+    });
+
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+    },{threshold:0.1});
+    document.querySelectorAll('.card').forEach(c=>observer.observe(c));
+  </script>
+</body>
+</html>

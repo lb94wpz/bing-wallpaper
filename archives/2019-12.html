@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2019-12 必应壁纸</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0a0a0a;color:#e4e4e7}
+    a{color:#a1a1aa;text-decoration:none}a:hover{color:#fafafa}
+
+    .nav{padding:20px clamp(16px,4vw,48px);max-width:1400px;margin:0 auto}
+    .nav a{font-size:.85rem;color:#52525b;transition:color .2s}.nav a:hover{color:#fafafa}
+
+    .section{max-width:1400px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 60px}
+    .section h1{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:#fafafa;margin-bottom:8px}
+    .section .count{font-size:.85rem;color:#52525b;margin-bottom:32px;display:block}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+    .card{position:relative;border-radius:10px;overflow:hidden;cursor:pointer;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s}
+    .card.visible{opacity:1;transform:translateY(0)}
+    .card img{width:100%;display:block;transition:transform .4s}
+    .card:hover img{transform:scale(1.05)}
+    .card .overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,10,10,.8) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:16px;opacity:0;transition:opacity .3s}
+    .card:hover .overlay{opacity:1}
+    .card .overlay .card-title{font-size:.95rem;font-weight:500;color:#fafafa}
+    .card .overlay .card-date{font-size:.8rem;color:#a1a1aa;margin-top:4px}
+
+    .lightbox{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);align-items:center;justify-content:center;cursor:zoom-out}
+    .lightbox.active{display:flex}
+    .lightbox img{max-width:92vw;max-height:88vh;object-fit:contain;border-radius:4px}
+    .lightbox .lb-info{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);text-align:center;color:#a1a1aa}
+    .lightbox .lb-info .lb-title{font-size:1rem;color:#fafafa;margin-bottom:4px}
+    .lightbox .lb-info .lb-meta{font-size:.8rem;color:#71717a}
+    .lightbox .lb-close{position:absolute;top:24px;right:24px;width:40px;height:40px;background:#18181b;border:1px solid #27272a;border-radius:50%;color:#a1a1aa;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .lightbox .lb-close:hover{background:#27272a;color:#fafafa}
+    .lightbox .lb-download{position:absolute;top:24px;right:80px;padding:8px 20px;background:#fafafa;color:#0a0a0a;border-radius:6px;font-size:.85rem;font-weight:500;cursor:pointer;text-decoration:none;transition:all .2s}
+    .lightbox .lb-download:hover{background:#d4d4d8}
+    .lightbox .lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;background:rgba(24,24,27,.7);border:1px solid #3f3f46;border-radius:50%;color:#a1a1aa;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .lightbox .lb-nav:hover{background:#27272a;color:#fafafa}
+    .lightbox .lb-prev{left:20px}
+    .lightbox .lb-next{right:20px}
+
+    @media(max-width:640px){
+      .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+      .card .overlay{opacity:1;background:linear-gradient(0deg,rgba(10,10,10,.7) 0%,transparent 40%)}
+      .lightbox .lb-nav{width:40px;height:40px;font-size:1.1rem}
+      .lightbox .lb-prev{left:8px}
+      .lightbox .lb-next{right:8px}
+    }
+  </style>
+</head>
+<body>
+  <div class="nav"><a href="/">← 返回首页</a></div>
+  <div class="section">
+    <h1>2019-12 必应壁纸</h1>
+    <span class="count">31 张壁纸</span>
+    <div class="grid">
+      <div class="card" onclick="openLightbox(0)">
+        <img src="https://www.bing.com/th?id=OHR.NYEBacknang_ZH-CN6301969939_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="巴克南的跨年烟火" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">巴克南的跨年烟火</span>
+          <span class="card-date">2019-12-31</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(1)">
+        <img src="https://www.bing.com/th?id=OHR.SkyIslands_ZH-CN6229467399_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="图森附近索诺兰沙漠中的巨柱仙人掌" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">图森附近索诺兰沙漠中的巨柱仙人掌</span>
+          <span class="card-date">2019-12-30</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(2)">
+        <img src="https://www.bing.com/th?id=OHR.RamsauHinterseeEislauf_ZH-CN9685733410_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="贝希特斯加登县拉姆绍小镇上结冰的Hintersee湖和滑冰者" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">贝希特斯加登县拉姆绍小镇上结冰的Hintersee湖和滑冰者</span>
+          <span class="card-date">2019-12-29</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(3)">
+        <img src="https://www.bing.com/th?id=OHR.TrumpeterWinter_ZH-CN6156392179_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="凯利温泉中的黑嘴天鹅" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">凯利温泉中的黑嘴天鹅</span>
+          <span class="card-date">2019-12-28</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(4)">
+        <img src="https://www.bing.com/th?id=OHR.FrozenTree_ZH-CN9591258534_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="池塘边结了冰的树" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">池塘边结了冰的树</span>
+          <span class="card-date">2019-12-27</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(5)">
+        <img src="https://www.bing.com/th?id=OHR.SloveniaAlps_ZH-CN6052706424_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="位于Praprotno村之上的圣托马斯教堂" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">位于Praprotno村之上的圣托马斯教堂</span>
+          <span class="card-date">2019-12-26</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(6)">
+        <img src="https://www.bing.com/th?id=OHR.WarsawXmas_ZH-CN5981724395_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="华沙的圣诞节日装饰" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">华沙的圣诞节日装饰</span>
+          <span class="card-date">2019-12-25</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(7)">
+        <img src="https://www.bing.com/th?id=OHR.ReindeerNorway_ZH-CN5913190372_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="挪威的一群驯鹿" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">挪威的一群驯鹿</span>
+          <span class="card-date">2019-12-24</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(8)">
+        <img src="https://www.bing.com/th?id=OHR.AiringGrievances_ZH-CN5830208720_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="正在宣泄不满的两只巴布亚企鹅" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">正在宣泄不满的两只巴布亚企鹅</span>
+          <span class="card-date">2019-12-23</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(9)">
+        <img src="https://www.bing.com/th?id=OHR.Dongzhi2019_ZH-CN6252826480_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="【今日冬至】" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">【今日冬至】</span>
+          <span class="card-date">2019-12-22</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(10)">
+        <img src="https://www.bing.com/th?id=OHR.RealSnowflake_ZH-CN5687037252_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="雪花" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">雪花</span>
+          <span class="card-date">2019-12-21</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(11)">
+        <img src="https://www.bing.com/th?id=OHR.MauiEucalyptus_ZH-CN5616197787_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="哈纳公路沿线的彩虹桉树" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">哈纳公路沿线的彩虹桉树</span>
+          <span class="card-date">2019-12-20</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(12)">
+        <img src="https://www.bing.com/th?id=OHR.ValleyForge_ZH-CN8129420249_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="福吉谷国家历史公园中的小屋" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">福吉谷国家历史公园中的小屋</span>
+          <span class="card-date">2019-12-19</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(13)">
+        <img src="https://www.bing.com/th?id=OHR.HallXmasMarket_ZH-CN8059544504_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="一年一度的施瓦本哈尔圣诞市集" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">一年一度的施瓦本哈尔圣诞市集</span>
+          <span class="card-date">2019-12-18</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(14)">
+        <img src="https://www.bing.com/th?id=OHR.TempleofSaturn_ZH-CN7983217544_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="古罗马广场上的萨图尔诺农神庙" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">古罗马广场上的萨图尔诺农神庙</span>
+          <span class="card-date">2019-12-17</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(15)">
+        <img src="https://www.bing.com/th?id=OHR.ReconciliationDay_ZH-CN7914130812_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="桌山" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">桌山</span>
+          <span class="card-date">2019-12-16</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(16)">
+        <img src="https://www.bing.com/th?id=OHR.NutsWeekend_ZH-CN7847508117_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="银装素裹的Luzulo-Fagetum山毛榉林" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">银装素裹的Luzulo-Fagetum山毛榉林</span>
+          <span class="card-date">2019-12-15</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(17)">
+        <img src="https://www.bing.com/th?id=OHR.SpruceGrouse_ZH-CN7756892167_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="云杉树中的一只云杉松鸡" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">云杉树中的一只云杉松鸡</span>
+          <span class="card-date">2019-12-14</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(18)">
+        <img src="https://www.bing.com/th?id=OHR.LandwasserViaduct_ZH-CN7692075960_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="朗德瓦萨桥上的贝尔尼纳快车" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">朗德瓦萨桥上的贝尔尼纳快车</span>
+          <span class="card-date">2019-12-13</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(19)">
+        <img src="https://www.bing.com/th?id=OHR.SheepCoteClod_ZH-CN7630556554_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="冰岛羊" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">冰岛羊</span>
+          <span class="card-date">2019-12-12</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(20)">
+        <img src="https://www.bing.com/th?id=OHR.TengbocheMonastery_ZH-CN7555740661_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="喜马拉雅山脉中的Tengboche修道院" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">喜马拉雅山脉中的Tengboche修道院</span>
+          <span class="card-date">2019-12-11</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(21)">
+        <img src="https://www.bing.com/th?id=OHR.Seidenschwanz_ZH-CN7486965726_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="正在吃花楸果实的太平鸟" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">正在吃花楸果实的太平鸟</span>
+          <span class="card-date">2019-12-10</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(22)">
+        <img src="https://www.bing.com/th?id=OHR.BlueChip_ZH-CN7376022522_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="一枚微芯片的特写" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">一枚微芯片的特写</span>
+          <span class="card-date">2019-12-09</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(23)">
+        <img src="https://www.bing.com/th?id=OHR.PurpleWeekend_ZH-CN7324572668_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="装饰有多个镜子、灯和空气喇叭的摩托车" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">装饰有多个镜子、灯和空气喇叭的摩托车</span>
+          <span class="card-date">2019-12-08</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(24)">
+        <img src="https://www.bing.com/th?id=OHR.KochiFall_ZH-CN7256567323_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="初雪与最后的秋色相会" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">初雪与最后的秋色相会</span>
+          <span class="card-date">2019-12-07</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(25)">
+        <img src="https://www.bing.com/th?id=OHR.NambungPinnacles_ZH-CN7198283991_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="南邦国家公园的尖峰石阵" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">南邦国家公园的尖峰石阵</span>
+          <span class="card-date">2019-12-06</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(26)">
+        <img src="https://www.bing.com/th?id=OHR.CanadaTreeFarm_ZH-CN6478268657_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="安大略省的圣诞树农场" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">安大略省的圣诞树农场</span>
+          <span class="card-date">2019-12-05</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(27)">
+        <img src="https://www.bing.com/th?id=OHR.RhinosOxpecker_ZH-CN6392794613_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="阿姆哈拉禁猎区的两只犀牛和一只啄牛鸟" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">阿姆哈拉禁猎区的两只犀牛和一只啄牛鸟</span>
+          <span class="card-date">2019-12-04</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(28)">
+        <img src="https://www.bing.com/th?id=OHR.PuffinSharing_ZH-CN6330890743_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="雄性大西洋海鹦将筑巢材料递给它的伴侣" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">雄性大西洋海鹦将筑巢材料递给它的伴侣</span>
+          <span class="card-date">2019-12-03</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(29)">
+        <img src="https://www.bing.com/th?id=OHR.PortlandDawn_ZH-CN6187930845_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="波特兰比尔灯塔处的晨光和海浪" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">波特兰比尔灯塔处的晨光和海浪</span>
+          <span class="card-date">2019-12-02</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(30)">
+        <img src="https://www.bing.com/th?id=OHR.HalleyVI_ZH-CN6048621088_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="“哈雷六号”科考站上空的南极光" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">“哈雷六号”科考站上空的南极光</span>
+          <span class="card-date">2019-12-01</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lb-close" onclick="closeLightbox()" aria-label="关闭">&times;</button>
+    <a class="lb-download" id="lb-download" href="#" target="_blank" rel="noopener" onclick="event.stopPropagation()">查看原图</a>
+    <button class="lb-nav lb-prev" onclick="event.stopPropagation();navigate(-1)" aria-label="上一张">&#8249;</button>
+    <button class="lb-nav lb-next" onclick="event.stopPropagation();navigate(1)" aria-label="下一张">&#8250;</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-info">
+      <div class="lb-title" id="lb-title"></div>
+      <div class="lb-meta" id="lb-meta"></div>
+    </div>
+  </div>
+
+  <script>
+    const items=[{"url":"https://www.bing.com/th?id=OHR.NYEBacknang_ZH-CN6301969939_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"巴克南的跨年烟火","date":"2019-12-31","cr":"巴克南的跨年烟火，德国 (© Lilly/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.SkyIslands_ZH-CN6229467399_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"图森附近索诺兰沙漠中的巨柱仙人掌","date":"2019-12-30","cr":"图森附近索诺兰沙漠中的巨柱仙人掌，亚利桑那州 (© Jack Dykinga/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.RamsauHinterseeEislauf_ZH-CN9685733410_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"贝希特斯加登县拉姆绍小镇上结冰的Hintersee湖和滑冰者","date":"2019-12-29","cr":"贝希特斯加登县拉姆绍小镇上结冰的Hintersee湖和滑冰者，德国巴伐利亚 (© Jana Mänz/Westend61/Offset)"},{"url":"https://www.bing.com/th?id=OHR.TrumpeterWinter_ZH-CN6156392179_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"凯利温泉中的黑嘴天鹅","date":"2019-12-28","cr":"凯利温泉中的黑嘴天鹅，怀俄明州 (© DEEPOL by plainpicture)"},{"url":"https://www.bing.com/th?id=OHR.FrozenTree_ZH-CN9591258534_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"池塘边结了冰的树","date":"2019-12-27","cr":"池塘边结了冰的树 (© Philippe Sainte-Laudy Photography/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.SloveniaAlps_ZH-CN6052706424_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"位于Praprotno村之上的圣托马斯教堂","date":"2019-12-26","cr":"位于Praprotno村之上的圣托马斯教堂 (© Guy Edwardes/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.WarsawXmas_ZH-CN5981724395_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"华沙的圣诞节日装饰","date":"2019-12-25","cr":"华沙的圣诞节日装饰，波兰 (© David Milsen/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.ReindeerNorway_ZH-CN5913190372_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"挪威的一群驯鹿","date":"2019-12-24","cr":"挪威的一群驯鹿 (© Lena Granefelt/plainpicture)"},{"url":"https://www.bing.com/th?id=OHR.AiringGrievances_ZH-CN5830208720_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"正在宣泄不满的两只巴布亚企鹅","date":"2019-12-23","cr":"正在宣泄不满的两只巴布亚企鹅，南极洲 (© Grafissimo/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.Dongzhi2019_ZH-CN6252826480_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"【今日冬至】","date":"2019-12-22","cr":"【今日冬至】 (© Sino Images/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.RealSnowflake_ZH-CN5687037252_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"雪花","date":"2019-12-21","cr":"雪花 (© TothGaborGyula/Getty Images Plus)"},{"url":"https://www.bing.com/th?id=OHR.MauiEucalyptus_ZH-CN5616197787_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"哈纳公路沿线的彩虹桉树","date":"2019-12-20","cr":"哈纳公路沿线的彩虹桉树，毛伊岛 (© GlowingEarth/Getty Images Plus)"},{"url":"https://www.bing.com/th?id=OHR.ValleyForge_ZH-CN8129420249_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"福吉谷国家历史公园中的小屋","date":"2019-12-19","cr":"福吉谷国家历史公园中的小屋，宾夕法尼亚 (© Mark C. Morris/Shutterstock)"},{"url":"https://www.bing.com/th?id=OHR.HallXmasMarket_ZH-CN8059544504_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"一年一度的施瓦本哈尔圣诞市集","date":"2019-12-18","cr":"一年一度的施瓦本哈尔圣诞市集，德国巴登-符腾堡州 (© sack/Getty Images Plus)"},{"url":"https://www.bing.com/th?id=OHR.TempleofSaturn_ZH-CN7983217544_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"古罗马广场上的萨图尔诺农神庙","date":"2019-12-17","cr":"古罗马广场上的萨图尔诺农神庙，意大利罗马 (© Joe Daniel Price/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.ReconciliationDay_ZH-CN7914130812_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"桌山","date":"2019-12-16","cr":"桌山，南非开普敦 (© 4FR/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.NutsWeekend_ZH-CN7847508117_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"银装素裹的Luzulo-Fagetum山毛榉林","date":"2019-12-15","cr":"银装素裹的Luzulo-Fagetum山毛榉林，比利时阿登 (© Philippe Moes/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.SpruceGrouse_ZH-CN7756892167_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"云杉树中的一只云杉松鸡","date":"2019-12-14","cr":"云杉树中的一只云杉松鸡，阿拉斯加德纳利国家公园 (© Yva Momatiuk and John Eastcott/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.LandwasserViaduct_ZH-CN7692075960_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"朗德瓦萨桥上的贝尔尼纳快车","date":"2019-12-13","cr":"朗德瓦萨桥上的贝尔尼纳快车，瑞士格劳宾登 (© Marco Bottigelli/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.SheepCoteClod_ZH-CN7630556554_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"冰岛羊","date":"2019-12-12","cr":"冰岛羊 (© John Porter LRPS/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.TengbocheMonastery_ZH-CN7555740661_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"喜马拉雅山脉中的Tengboche修道院","date":"2019-12-11","cr":"喜马拉雅山脉中的Tengboche修道院，尼泊尔 (© Kyle Hammons/Tandem Stills + Motion)"},{"url":"https://www.bing.com/th?id=OHR.Seidenschwanz_ZH-CN7486965726_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"正在吃花楸果实的太平鸟","date":"2019-12-10","cr":"正在吃花楸果实的太平鸟 (© Berndt Fischer/Getty Images Plus)"},{"url":"https://www.bing.com/th?id=OHR.BlueChip_ZH-CN7376022522_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"一枚微芯片的特写","date":"2019-12-09","cr":"一枚微芯片的特写 (© Bobkov Evgeniy/Shutterstock)"},{"url":"https://www.bing.com/th?id=OHR.PurpleWeekend_ZH-CN7324572668_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"装饰有多个镜子、灯和空气喇叭的摩托车","date":"2019-12-08","cr":"装饰有多个镜子、灯和空气喇叭的摩托车 (© stocknshares/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.KochiFall_ZH-CN7256567323_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"初雪与最后的秋色相会","date":"2019-12-07","cr":"初雪与最后的秋色相会，日本 (© SpontaneousPictures/iStock/Getty Images Plus)"},{"url":"https://www.bing.com/th?id=OHR.NambungPinnacles_ZH-CN7198283991_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"南邦国家公园的尖峰石阵","date":"2019-12-06","cr":"南邦国家公园的尖峰石阵，西澳大利亚州 (© Frank Krahmer/Getty Images Plus)"},{"url":"https://www.bing.com/th?id=OHR.CanadaTreeFarm_ZH-CN6478268657_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"安大略省的圣诞树农场","date":"2019-12-05","cr":"安大略省的圣诞树农场，加拿大 (© FatCamera/Getty Images Plus)"},{"url":"https://www.bing.com/th?id=OHR.RhinosOxpecker_ZH-CN6392794613_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"阿姆哈拉禁猎区的两只犀牛和一只啄牛鸟","date":"2019-12-04","cr":"阿姆哈拉禁猎区的两只犀牛和一只啄牛鸟，南非 (© Robert Harding World Imagery/Offset)"},{"url":"https://www.bing.com/th?id=OHR.PuffinSharing_ZH-CN6330890743_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"雄性大西洋海鹦将筑巢材料递给它的伴侣","date":"2019-12-03","cr":"雄性大西洋海鹦将筑巢材料递给它的伴侣，威尔士斯科默岛 (© Danny Green/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.PortlandDawn_ZH-CN6187930845_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"波特兰比尔灯塔处的晨光和海浪","date":"2019-12-02","cr":"波特兰比尔灯塔处的晨光和海浪，英格兰多塞特郡 (© Lee Pengelly/Getty Images Plus)"},{"url":"https://www.bing.com/th?id=OHR.HalleyVI_ZH-CN6048621088_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"“哈雷六号”科考站上空的南极光","date":"2019-12-01","cr":"“哈雷六号”科考站上空的南极光，南极洲 (© Stuart Holroyd/Alamy)"}];
+    let currentIndex=0;
+
+    function openLightbox(index){
+      currentIndex=index;
+      const w=items[index];
+      document.getElementById('lb-img').src=w.url;
+      document.getElementById('lb-title').textContent=w.title;
+      document.getElementById('lb-meta').textContent=w.date+' · '+w.cr;
+      document.getElementById('lb-download').href=w.url;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow='hidden';
+    }
+    function navigate(dir){
+      currentIndex=(currentIndex+dir+items.length)%items.length;
+      const w=items[currentIndex];
+      document.getElementById('lb-img').src=w.url;
+      document.getElementById('lb-title').textContent=w.title;
+      document.getElementById('lb-meta').textContent=w.date+' · '+w.cr;
+      document.getElementById('lb-download').href=w.url;
+    }
+    function closeLightbox(){
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow='';
+    }
+    document.addEventListener('keydown',e=>{
+      if(e.key==='Escape')closeLightbox();
+      if(e.key==='ArrowLeft')navigate(-1);
+      if(e.key==='ArrowRight')navigate(1);
+    });
+
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+    },{threshold:0.1});
+    document.querySelectorAll('.card').forEach(c=>observer.observe(c));
+  </script>
+</body>
+</html>

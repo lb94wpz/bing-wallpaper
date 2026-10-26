@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2018-11 必应壁纸</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0a0a0a;color:#e4e4e7}
+    a{color:#a1a1aa;text-decoration:none}a:hover{color:#fafafa}
+
+    .nav{padding:20px clamp(16px,4vw,48px);max-width:1400px;margin:0 auto}
+    .nav a{font-size:.85rem;color:#52525b;transition:color .2s}.nav a:hover{color:#fafafa}
+
+    .section{max-width:1400px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 60px}
+    .section h1{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:#fafafa;margin-bottom:8px}
+    .section .count{font-size:.85rem;color:#52525b;margin-bottom:32px;display:block}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+    .card{position:relative;border-radius:10px;overflow:hidden;cursor:pointer;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s}
+    .card.visible{opacity:1;transform:translateY(0)}
+    .card img{width:100%;display:block;transition:transform .4s}
+    .card:hover img{transform:scale(1.05)}
+    .card .overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,10,10,.8) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:16px;opacity:0;transition:opacity .3s}
+    .card:hover .overlay{opacity:1}
+    .card .overlay .card-title{font-size:.95rem;font-weight:500;color:#fafafa}
+    .card .overlay .card-date{font-size:.8rem;color:#a1a1aa;margin-top:4px}
+
+    .lightbox{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);align-items:center;justify-content:center;cursor:zoom-out}
+    .lightbox.active{display:flex}
+    .lightbox img{max-width:92vw;max-height:88vh;object-fit:contain;border-radius:4px}
+    .lightbox .lb-info{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);text-align:center;color:#a1a1aa}
+    .lightbox .lb-info .lb-title{font-size:1rem;color:#fafafa;margin-bottom:4px}
+    .lightbox .lb-info .lb-meta{font-size:.8rem;color:#71717a}
+    .lightbox .lb-close{position:absolute;top:24px;right:24px;width:40px;height:40px;background:#18181b;border:1px solid #27272a;border-radius:50%;color:#a1a1aa;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .lightbox .lb-close:hover{background:#27272a;color:#fafafa}
+    .lightbox .lb-download{position:absolute;top:24px;right:80px;padding:8px 20px;background:#fafafa;color:#0a0a0a;border-radius:6px;font-size:.85rem;font-weight:500;cursor:pointer;text-decoration:none;transition:all .2s}
+    .lightbox .lb-download:hover{background:#d4d4d8}
+    .lightbox .lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;background:rgba(24,24,27,.7);border:1px solid #3f3f46;border-radius:50%;color:#a1a1aa;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .lightbox .lb-nav:hover{background:#27272a;color:#fafafa}
+    .lightbox .lb-prev{left:20px}
+    .lightbox .lb-next{right:20px}
+
+    @media(max-width:640px){
+      .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+      .card .overlay{opacity:1;background:linear-gradient(0deg,rgba(10,10,10,.7) 0%,transparent 40%)}
+      .lightbox .lb-nav{width:40px;height:40px;font-size:1.1rem}
+      .lightbox .lb-prev{left:8px}
+      .lightbox .lb-next{right:8px}
+    }
+  </style>
+</head>
+<body>
+  <div class="nav"><a href="/">← 返回首页</a></div>
+  <div class="section">
+    <h1>2018-11 必应壁纸</h1>
+    <span class="count">30 张壁纸</span>
+    <div class="grid">
+      <div class="card" onclick="openLightbox(0)">
+        <img src="https://www.bing.com/th?id=OHR.KilchurnSky_EN-AU9115024751_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="基尔亨城堡" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">基尔亨城堡</span>
+          <span class="card-date">2018-11-30</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(1)">
+        <img src="https://www.bing.com/th?id=OHR.FrankfurtXmas_EN-AU9289866662_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="法兰克福圣诞集市" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">法兰克福圣诞集市</span>
+          <span class="card-date">2018-11-29</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(2)">
+        <img src="https://www.bing.com/th?id=OHR.GodrevyLighthouse_EN-AU10503280912_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="眺望圣艾夫斯湾的戈德雷维灯塔" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">眺望圣艾夫斯湾的戈德雷维灯塔</span>
+          <span class="card-date">2018-11-28</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(3)">
+        <img src="https://www.bing.com/th?id=OHR.FoxMolt_ZH-CN7917304192_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="北极狐" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">北极狐</span>
+          <span class="card-date">2018-11-27</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(4)">
+        <img src="https://www.bing.com/th?id=OHR.AliceCentralPark_EN-AU9031006021_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="纽约中央公园内的爱丽丝梦游仙境雕塑" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">纽约中央公园内的爱丽丝梦游仙境雕塑</span>
+          <span class="card-date">2018-11-26</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(5)">
+        <img src="https://www.bing.com/th?id=OHR.NorsteadLights_EN-AU10671353253_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="在划艇上方的北极光" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">在划艇上方的北极光</span>
+          <span class="card-date">2018-11-25</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(6)">
+        <img src="https://www.bing.com/th?id=OHR.DarwinOrigin_EN-AU14530151991_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="站在巨龟头上的达尔文雀" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">站在巨龟头上的达尔文雀</span>
+          <span class="card-date">2018-11-24</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(7)">
+        <img src="https://www.bing.com/th?id=OHR.VarennaSnow_EN-AU8379460546_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="科莫湖" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">科莫湖</span>
+          <span class="card-date">2018-11-23</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(8)">
+        <img src="https://www.bing.com/th?id=OHR.EibseeHerbst_EN-AU10470771604_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="艾布湖" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">艾布湖</span>
+          <span class="card-date">2018-11-22</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(9)">
+        <img src="https://www.bing.com/th?id=OHR.PoniesWales_EN-AU12228719072_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="布雷肯比肯斯国家公园的野生小马" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">布雷肯比肯斯国家公园的野生小马</span>
+          <span class="card-date">2018-11-21</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(10)">
+        <img src="https://www.bing.com/th?id=OHR.TDPflamingos_EN-AU9923017546_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="在百内国家公园上空飞翔的智利红鹳" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">在百内国家公园上空飞翔的智利红鹳</span>
+          <span class="card-date">2018-11-20</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(11)">
+        <img src="https://www.bing.com/th?id=OHR.NarrowsZion_EN-AU8919763491_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="锡安国家公园内的维尔京河" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">锡安国家公园内的维尔京河</span>
+          <span class="card-date">2018-11-19</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(12)">
+        <img src="https://www.bing.com/th?id=OHR.GeorgiaAquarium_EN-AU12896401074_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="乔治亚水族馆" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">乔治亚水族馆</span>
+          <span class="card-date">2018-11-18</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(13)">
+        <img src="https://www.bing.com/th?id=OHR.SpiritBearSleeps_EN-AU7883048709_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="沉睡的柯莫德熊" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">沉睡的柯莫德熊</span>
+          <span class="card-date">2018-11-17</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(14)">
+        <img src="https://www.bing.com/th?id=OHR.ChiribiqueteNP_EN-AU10713623298_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="奇里比克特山脉国家自然公园的古代岩画" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">奇里比克特山脉国家自然公园的古代岩画</span>
+          <span class="card-date">2018-11-16</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(15)">
+        <img src="https://www.bing.com/th?id=OHR.EcolaSP_ZH-CN10746626161_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="刘易斯和克拉克国家历史公园" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">刘易斯和克拉克国家历史公园</span>
+          <span class="card-date">2018-11-15</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(16)">
+        <img src="https://www.bing.com/th?id=OHR.LeGivre_EN-AU7576437900_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="奥赛博物馆展出的莫奈作品" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">奥赛博物馆展出的莫奈作品</span>
+          <span class="card-date">2018-11-14</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(17)">
+        <img src="https://www.bing.com/th?id=OHR.TundraSwanMN_EN-AU11075882211_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="飞过密西西比河面的小天鹅" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">飞过密西西比河面的小天鹅</span>
+          <span class="card-date">2018-11-13</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(18)">
+        <img src="https://www.bing.com/th?id=OHR.HamersleyGorge_EN-AU6119915173_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="哈默斯利峡谷里的石头结构" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">哈默斯利峡谷里的石头结构</span>
+          <span class="card-date">2018-11-12</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(19)">
+        <img src="https://www.bing.com/th?id=OHR.WavePoppy_EN-AU9071800685_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="帝国战争博物馆北馆内的装置艺术‘Blood Swept Lands and Seas of Red’" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">帝国战争博物馆北馆内的装置艺术‘Blood Swept Lands and Seas of Red’</span>
+          <span class="card-date">2018-11-11</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(20)">
+        <img src="https://www.bing.com/th?id=OHR.BadlandsBday_EN-AU10299777329_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="恶地国家公园" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">恶地国家公园</span>
+          <span class="card-date">2018-11-10</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(21)">
+        <img src="https://www.bing.com/th?id=OHR.CupFungus_EN-AU8870948617_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="科尔科瓦杜国家公园的盘菌" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">科尔科瓦杜国家公园的盘菌</span>
+          <span class="card-date">2018-11-09</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(22)">
+        <img src="https://www.bing.com/th?id=OHR.ManateeAwareness_ZH-CN7743165279_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="蓝色温泉州立公园内的海牛" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">蓝色温泉州立公园内的海牛</span>
+          <span class="card-date">2018-11-08</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(23)">
+        <img src="https://www.bing.com/th?id=OHR.lidongjieya_ZH-CN9263684179_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="【今日立冬】江苏兴化市老街" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">【今日立冬】江苏兴化市老街</span>
+          <span class="card-date">2018-11-07</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(24)">
+        <img src="https://www.bing.com/th?id=OHR.HoneycombKoolamaBay_ZH-CN8963688992_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="蜂窝状风化作用" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">蜂窝状风化作用</span>
+          <span class="card-date">2018-11-06</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(25)">
+        <img src="https://www.bing.com/th?id=OHR.AutumnNeuschwanstein_EN-AU10604288553_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="新天鹅堡" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">新天鹅堡</span>
+          <span class="card-date">2018-11-05</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(26)">
+        <img src="https://www.bing.com/th?id=OHR.NYCM_EN-AU8962861446_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="韦拉札诺海峡大桥上的赛跑者" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">韦拉札诺海峡大桥上的赛跑者</span>
+          <span class="card-date">2018-11-04</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(27)">
+        <img src="https://www.bing.com/th?id=OHR.BisonDay_EN-AU9060544603_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="羚羊岛州立公园内的美洲野牛" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">羚羊岛州立公园内的美洲野牛</span>
+          <span class="card-date">2018-11-03</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(28)">
+        <img src="https://www.bing.com/th?id=OHR.DeadPhotographer_EN-US9480942912_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="卡拉维拉人偶" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">卡拉维拉人偶</span>
+          <span class="card-date">2018-11-02</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(29)">
+        <img src="https://www.bing.com/th?id=OHR.OyamaLeaves_ZH-CN10033445271_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="大山" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">大山</span>
+          <span class="card-date">2018-11-01</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lb-close" onclick="closeLightbox()" aria-label="关闭">&times;</button>
+    <a class="lb-download" id="lb-download" href="#" target="_blank" rel="noopener" onclick="event.stopPropagation()">查看原图</a>
+    <button class="lb-nav lb-prev" onclick="event.stopPropagation();navigate(-1)" aria-label="上一张">&#8249;</button>
+    <button class="lb-nav lb-next" onclick="event.stopPropagation();navigate(1)" aria-label="下一张">&#8250;</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-info">
+      <div class="lb-title" id="lb-title"></div>
+      <div class="lb-meta" id="lb-meta"></div>
+    </div>
+  </div>
+
+  <script>
+    const items=[{"url":"https://www.bing.com/th?id=OHR.KilchurnSky_EN-AU9115024751_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"基尔亨城堡","date":"2018-11-30","cr":"基尔亨城堡，苏格兰 (© Jon Arnold/Danita Delimont)"},{"url":"https://www.bing.com/th?id=OHR.FrankfurtXmas_EN-AU9289866662_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"法兰克福圣诞集市","date":"2018-11-29","cr":"法兰克福圣诞集市，德国 (© Patrice von Collani/Westend61/Offset)"},{"url":"https://www.bing.com/th?id=OHR.GodrevyLighthouse_EN-AU10503280912_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"眺望圣艾夫斯湾的戈德雷维灯塔","date":"2018-11-28","cr":"眺望圣艾夫斯湾的戈德雷维灯塔，英国康沃尔郡 (© David Chapman/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.FoxMolt_ZH-CN7917304192_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"北极狐","date":"2018-11-27","cr":"北极狐，挪威多夫勒山 (© Andy Trowbridge/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.AliceCentralPark_EN-AU9031006021_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"纽约中央公园内的爱丽丝梦游仙境雕塑","date":"2018-11-26","cr":"纽约中央公园内的爱丽丝梦游仙境雕塑，美国纽约  (© Diego Grandi/Shutterstock)"},{"url":"https://www.bing.com/th?id=OHR.NorsteadLights_EN-AU10671353253_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"在划艇上方的北极光","date":"2018-11-25","cr":"在划艇上方的北极光，加拿大纽芬兰 (© Adam Woodworth/Aurora Photos)"},{"url":"https://www.bing.com/th?id=OHR.DarwinOrigin_EN-AU14530151991_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"站在巨龟头上的达尔文雀","date":"2018-11-24","cr":"站在巨龟头上的达尔文雀 (© Tui De Roy/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.VarennaSnow_EN-AU8379460546_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"科莫湖","date":"2018-11-23","cr":"科莫湖，意大利瓦伦纳 (© Andrea Comi/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.EibseeHerbst_EN-AU10470771604_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"艾布湖","date":"2018-11-22","cr":"艾布湖，德国巴伐利亚 (© plainpicture/BY)"},{"url":"https://www.bing.com/th?id=OHR.PoniesWales_EN-AU12228719072_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"布雷肯比肯斯国家公园的野生小马","date":"2018-11-21","cr":"布雷肯比肯斯国家公园的野生小马，英国威尔士 (© Justin Foulkes/SIME/eStock Photo)"},{"url":"https://www.bing.com/th?id=OHR.TDPflamingos_EN-AU9923017546_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"在百内国家公园上空飞翔的智利红鹳","date":"2018-11-20","cr":"在百内国家公园上空飞翔的智利红鹳，智利 (© Ben Hall/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.NarrowsZion_EN-AU8919763491_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"锡安国家公园内的维尔京河","date":"2018-11-19","cr":"锡安国家公园内的维尔京河，美国犹他州 (© Justinreznick/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.GeorgiaAquarium_EN-AU12896401074_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"乔治亚水族馆","date":"2018-11-18","cr":"乔治亚水族馆，美国亚特兰大 (© novikat/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.SpiritBearSleeps_EN-AU7883048709_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"沉睡的柯莫德熊","date":"2018-11-17","cr":"沉睡的柯莫德熊，加拿大英属哥伦比亚 (© John E Marriott/SuperStock)"},{"url":"https://www.bing.com/th?id=OHR.ChiribiqueteNP_EN-AU10713623298_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"奇里比克特山脉国家自然公园的古代岩画","date":"2018-11-16","cr":"奇里比克特山脉国家自然公园的古代岩画，哥伦比亚 (© Steve Winter/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.EcolaSP_ZH-CN10746626161_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"刘易斯和克拉克国家历史公园","date":"2018-11-15","cr":"刘易斯和克拉克国家历史公园，美国俄勒冈州 (© Morey Milbradt/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.LeGivre_EN-AU7576437900_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"奥赛博物馆展出的莫奈作品","date":"2018-11-14","cr":"奥赛博物馆展出的莫奈作品，法国巴黎 (Photo © VCG Wilson/Corbis via Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.TundraSwanMN_EN-AU11075882211_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"飞过密西西比河面的小天鹅","date":"2018-11-13","cr":"飞过密西西比河面的小天鹅，美国明尼苏达州 (© National Geographic Image Collection/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.HamersleyGorge_EN-AU6119915173_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"哈默斯利峡谷里的石头结构","date":"2018-11-12","cr":"哈默斯利峡谷里的石头结构，澳大利亚 (© Frank Krahmer/Corbis Documentary/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.WavePoppy_EN-AU9071800685_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"帝国战争博物馆北馆内的装置艺术‘Blood Swept Lands and Seas of Red’","date":"2018-11-11","cr":"帝国战争博物馆北馆内的装置艺术‘Blood Swept Lands and Seas of Red’，英国曼彻斯特 (© Christopher Furlong/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.BadlandsBday_EN-AU10299777329_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"恶地国家公园","date":"2018-11-10","cr":"恶地国家公园 (© Tetra Images/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.CupFungus_EN-AU8870948617_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"科尔科瓦杜国家公园的盘菌","date":"2018-11-09","cr":"科尔科瓦杜国家公园的盘菌 (© Alex Hyde/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.ManateeAwareness_ZH-CN7743165279_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"蓝色温泉州立公园内的海牛","date":"2018-11-08","cr":"蓝色温泉州立公园内的海牛，美国佛罗里达州 (© Paul Nicklen/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.lidongjieya_ZH-CN9263684179_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"【今日立冬】江苏兴化市老街","date":"2018-11-07","cr":"【今日立冬】江苏兴化市老街 (© ViewStock/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.HoneycombKoolamaBay_ZH-CN8963688992_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"蜂窝状风化作用","date":"2018-11-06","cr":"蜂窝状风化作用，澳大利亚 (© Ralph Lee Hopkins/Shutterstock/Offset)"},{"url":"https://www.bing.com/th?id=OHR.AutumnNeuschwanstein_EN-AU10604288553_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"新天鹅堡","date":"2018-11-05","cr":"新天鹅堡，德国巴伐利亚 (© Boris Jordan Photography/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.NYCM_EN-AU8962861446_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"韦拉札诺海峡大桥上的赛跑者","date":"2018-11-04","cr":"韦拉札诺海峡大桥上的赛跑者，美国纽约州 (© David Madison/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.BisonDay_EN-AU9060544603_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"羚羊岛州立公园内的美洲野牛","date":"2018-11-03","cr":"羚羊岛州立公园内的美洲野牛，美国犹他州  (© Conor Barry/Aurora Photos)"},{"url":"https://www.bing.com/th?id=OHR.DeadPhotographer_EN-US9480942912_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"卡拉维拉人偶","date":"2018-11-02","cr":"卡拉维拉人偶，墨西哥亡灵节 (© PvE/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.OyamaLeaves_ZH-CN10033445271_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"大山","date":"2018-11-01","cr":"大山，日本神奈川县 (© Katsuhiro Yamanashi/Getty Images)"}];
+    let currentIndex=0;
+
+    function openLightbox(index){
+      currentIndex=index;
+      const w=items[index];
+      document.getElementById('lb-img').src=w.url;
+      document.getElementById('lb-title').textContent=w.title;
+      document.getElementById('lb-meta').textContent=w.date+' · '+w.cr;
+      document.getElementById('lb-download').href=w.url;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow='hidden';
+    }
+    function navigate(dir){
+      currentIndex=(currentIndex+dir+items.length)%items.length;
+      const w=items[currentIndex];
+      document.getElementById('lb-img').src=w.url;
+      document.getElementById('lb-title').textContent=w.title;
+      document.getElementById('lb-meta').textContent=w.date+' · '+w.cr;
+      document.getElementById('lb-download').href=w.url;
+    }
+    function closeLightbox(){
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow='';
+    }
+    document.addEventListener('keydown',e=>{
+      if(e.key==='Escape')closeLightbox();
+      if(e.key==='ArrowLeft')navigate(-1);
+      if(e.key==='ArrowRight')navigate(1);
+    });
+
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+    },{threshold:0.1});
+    document.querySelectorAll('.card').forEach(c=>observer.observe(c));
+  </script>
+</body>
+</html>

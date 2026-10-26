@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2020-09 必应壁纸</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0a0a0a;color:#e4e4e7}
+    a{color:#a1a1aa;text-decoration:none}a:hover{color:#fafafa}
+
+    .nav{padding:20px clamp(16px,4vw,48px);max-width:1400px;margin:0 auto}
+    .nav a{font-size:.85rem;color:#52525b;transition:color .2s}.nav a:hover{color:#fafafa}
+
+    .section{max-width:1400px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 60px}
+    .section h1{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:#fafafa;margin-bottom:8px}
+    .section .count{font-size:.85rem;color:#52525b;margin-bottom:32px;display:block}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+    .card{position:relative;border-radius:10px;overflow:hidden;cursor:pointer;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s}
+    .card.visible{opacity:1;transform:translateY(0)}
+    .card img{width:100%;display:block;transition:transform .4s}
+    .card:hover img{transform:scale(1.05)}
+    .card .overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,10,10,.8) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:16px;opacity:0;transition:opacity .3s}
+    .card:hover .overlay{opacity:1}
+    .card .overlay .card-title{font-size:.95rem;font-weight:500;color:#fafafa}
+    .card .overlay .card-date{font-size:.8rem;color:#a1a1aa;margin-top:4px}
+
+    .lightbox{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);align-items:center;justify-content:center;cursor:zoom-out}
+    .lightbox.active{display:flex}
+    .lightbox img{max-width:92vw;max-height:88vh;object-fit:contain;border-radius:4px}
+    .lightbox .lb-info{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);text-align:center;color:#a1a1aa}
+    .lightbox .lb-info .lb-title{font-size:1rem;color:#fafafa;margin-bottom:4px}
+    .lightbox .lb-info .lb-meta{font-size:.8rem;color:#71717a}
+    .lightbox .lb-close{position:absolute;top:24px;right:24px;width:40px;height:40px;background:#18181b;border:1px solid #27272a;border-radius:50%;color:#a1a1aa;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .lightbox .lb-close:hover{background:#27272a;color:#fafafa}
+    .lightbox .lb-download{position:absolute;top:24px;right:80px;padding:8px 20px;background:#fafafa;color:#0a0a0a;border-radius:6px;font-size:.85rem;font-weight:500;cursor:pointer;text-decoration:none;transition:all .2s}
+    .lightbox .lb-download:hover{background:#d4d4d8}
+    .lightbox .lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;background:rgba(24,24,27,.7);border:1px solid #3f3f46;border-radius:50%;color:#a1a1aa;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .lightbox .lb-nav:hover{background:#27272a;color:#fafafa}
+    .lightbox .lb-prev{left:20px}
+    .lightbox .lb-next{right:20px}
+
+    @media(max-width:640px){
+      .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+      .card .overlay{opacity:1;background:linear-gradient(0deg,rgba(10,10,10,.7) 0%,transparent 40%)}
+      .lightbox .lb-nav{width:40px;height:40px;font-size:1.1rem}
+      .lightbox .lb-prev{left:8px}
+      .lightbox .lb-next{right:8px}
+    }
+  </style>
+</head>
+<body>
+  <div class="nav"><a href="/">← 返回首页</a></div>
+  <div class="section">
+    <h1>2020-09 必应壁纸</h1>
+    <span class="count">30 张壁纸</span>
+    <div class="grid">
+      <div class="card" onclick="openLightbox(0)">
+        <img src="https://www.bing.com/th?id=OHR.LaragangaMoth_ZH-CN2013788793_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="莫尔国家公园中的天蚕蛾" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">莫尔国家公园中的天蚕蛾</span>
+          <span class="card-date">2020-09-30</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(1)">
+        <img src="https://www.bing.com/th?id=OHR.Lavaux_ZH-CN1891785892_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="日内瓦湖岸上陡峭的拉沃葡萄园梯田" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">日内瓦湖岸上陡峭的拉沃葡萄园梯田</span>
+          <span class="card-date">2020-09-29</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(2)">
+        <img src="https://www.bing.com/th?id=OHR.GreatBlueShark_ZH-CN1757082635_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="北大西洋亚速尔群岛附近的大青鲨" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">北大西洋亚速尔群岛附近的大青鲨</span>
+          <span class="card-date">2020-09-28</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(3)">
+        <img src="https://www.bing.com/th?id=OHR.FraserRiver_ZH-CN1625992097_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="温哥华东部的弗雷泽河和金耳朵山脉" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">温哥华东部的弗雷泽河和金耳朵山脉</span>
+          <span class="card-date">2020-09-27</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(4)">
+        <img src="https://www.bing.com/th?id=OHR.WatkinsGlen_ZH-CN1271268069_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="沃特金斯格伦州立公园的彩虹瀑布" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">沃特金斯格伦州立公园的彩虹瀑布</span>
+          <span class="card-date">2020-09-26</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(5)">
+        <img src="https://www.bing.com/th?id=OHR.LoarreCastle_ZH-CN1136982025_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="洛阿雷城堡" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">洛阿雷城堡</span>
+          <span class="card-date">2020-09-25</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(6)">
+        <img src="https://www.bing.com/th?id=OHR.Almabtrieb_ZH-CN8639425400_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="为牛下山节" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">为牛下山节</span>
+          <span class="card-date">2020-09-24</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(7)">
+        <img src="https://www.bing.com/th?id=OHR.GoldenGinkgo_ZH-CN8507013452_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="玄武湖公园的金色银杏叶" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">玄武湖公园的金色银杏叶</span>
+          <span class="card-date">2020-09-23</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(8)">
+        <img src="https://www.bing.com/th?id=OHR.Matamata_ZH-CN8111830275_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="马塔马塔附近的霍比特人村" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">马塔马塔附近的霍比特人村</span>
+          <span class="card-date">2020-09-22</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(9)">
+        <img src="https://www.bing.com/th?id=OHR.DorsetHeather_ZH-CN8284282373_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="斯塔德兰附近荒野上丛生的紫色和粉红色帚石楠" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">斯塔德兰附近荒野上丛生的紫色和粉红色帚石楠</span>
+          <span class="card-date">2020-09-21</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(10)">
+        <img src="https://www.bing.com/th?id=OHR.MontereyPup_ZH-CN7914017418_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="海獭妈妈和新生的小狗" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">海獭妈妈和新生的小狗</span>
+          <span class="card-date">2020-09-20</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(11)">
+        <img src="https://www.bing.com/th?id=OHR.PirateSails_ZH-CN7821037852_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="瓦尔内明德的帆船" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">瓦尔内明德的帆船</span>
+          <span class="card-date">2020-09-19</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(12)">
+        <img src="https://www.bing.com/th?id=OHR.IcelandicRettir_ZH-CN7738923773_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="为圈羊节准备的冰岛羊" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">为圈羊节准备的冰岛羊</span>
+          <span class="card-date">2020-09-18</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(13)">
+        <img src="https://www.bing.com/th?id=OHR.MistyVineyard_ZH-CN7642034150_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="波尔多葡萄园" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">波尔多葡萄园</span>
+          <span class="card-date">2020-09-17</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(14)">
+        <img src="https://www.bing.com/th?id=OHR.CityofGuanajuato_ZH-CN7559565626_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="瓜纳华托" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">瓜纳华托</span>
+          <span class="card-date">2020-09-16</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(15)">
+        <img src="https://www.bing.com/th?id=OHR.LifeguardEntrance_ZH-CN7394984988_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="日落时分中央海岸入口海滩上的救生员小屋" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">日落时分中央海岸入口海滩上的救生员小屋</span>
+          <span class="card-date">2020-09-15</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(16)">
+        <img src="https://www.bing.com/th?id=OHR.YellowBells_ZH-CN7296699570_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="在食用黄钟花的红喉北蜂鸟" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">在食用黄钟花的红喉北蜂鸟</span>
+          <span class="card-date">2020-09-14</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(17)">
+        <img src="https://www.bing.com/th?id=OHR.SangreCristoDunes_ZH-CN7193190503_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="以桑格雷－德克里斯托山为背景的沙丘" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">以桑格雷－德克里斯托山为背景的沙丘</span>
+          <span class="card-date">2020-09-13</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(18)">
+        <img src="https://www.bing.com/th?id=OHR.MedievalRocamadour_ZH-CN7063423495_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="罗卡马杜尔" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">罗卡马杜尔</span>
+          <span class="card-date">2020-09-12</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(19)">
+        <img src="https://www.bing.com/th?id=OHR.TorontoSky_ZH-CN6932705886_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="日落时的多伦多天际线" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">日落时的多伦多天际线</span>
+          <span class="card-date">2020-09-11</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(20)">
+        <img src="https://www.bing.com/th?id=OHR.KanchanaburiWaterfall_ZH-CN7582684869_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="Khuean Srinagarindra国家公园的Huay Mae Khamin瀑布" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">Khuean Srinagarindra国家公园的Huay Mae Khamin瀑布</span>
+          <span class="card-date">2020-09-10</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(21)">
+        <img src="https://www.bing.com/th?id=OHR.BeardedReedling_ZH-CN7714158275_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="埃尔姆利国家自然保护区里的一只文须雀" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">埃尔姆利国家自然保护区里的一只文须雀</span>
+          <span class="card-date">2020-09-09</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(22)">
+        <img src="https://www.bing.com/th?id=OHR.OttoSettembre_ZH-CN7378112626_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="瓦莱塔" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">瓦莱塔</span>
+          <span class="card-date">2020-09-08</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(23)">
+        <img src="https://www.bing.com/th?id=OHR.BleistifteFaber_ZH-CN7204563488_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="辉柏嘉展出的铅笔" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">辉柏嘉展出的铅笔</span>
+          <span class="card-date">2020-09-07</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(24)">
+        <img src="https://www.bing.com/th?id=OHR.LongIsland_ZH-CN7089248815_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="莫尼博克湾的芦苇岛" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">莫尼博克湾的芦苇岛</span>
+          <span class="card-date">2020-09-06</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(25)">
+        <img src="https://www.bing.com/th?id=OHR.BeaverDam_ZH-CN6855160492_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="锯齿国家森林里的海狸坝" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">锯齿国家森林里的海狸坝</span>
+          <span class="card-date">2020-09-05</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(26)">
+        <img src="https://www.bing.com/th?id=OHR.PicoIsland_ZH-CN6719354511_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="一头公牛站在皮库山前的田野中" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">一头公牛站在皮库山前的田野中</span>
+          <span class="card-date">2020-09-04</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(27)">
+        <img src="https://www.bing.com/th?id=OHR.FinancialTowers_ZH-CN6494148642_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="陆家嘴金融贸易区" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">陆家嘴金融贸易区</span>
+          <span class="card-date">2020-09-03</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(28)">
+        <img src="https://www.bing.com/th?id=OHR.SmithRock_ZH-CN6383276214_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="史密斯洛克州立公园" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">史密斯洛克州立公园</span>
+          <span class="card-date">2020-09-02</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(29)">
+        <img src="https://www.bing.com/th?id=OHR.OysterMushroom_ZH-CN6265453153_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="比利时的平菇" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">比利时的平菇</span>
+          <span class="card-date">2020-09-01</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lb-close" onclick="closeLightbox()" aria-label="关闭">&times;</button>
+    <a class="lb-download" id="lb-download" href="#" target="_blank" rel="noopener" onclick="event.stopPropagation()">查看原图</a>
+    <button class="lb-nav lb-prev" onclick="event.stopPropagation();navigate(-1)" aria-label="上一张">&#8249;</button>
+    <button class="lb-nav lb-next" onclick="event.stopPropagation();navigate(1)" aria-label="下一张">&#8250;</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-info">
+      <div class="lb-title" id="lb-title"></div>
+      <div class="lb-meta" id="lb-meta"></div>
+    </div>
+  </div>
+
+  <script>
+    const items=[{"url":"https://www.bing.com/th?id=OHR.LaragangaMoth_ZH-CN2013788793_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"莫尔国家公园中的天蚕蛾","date":"2020-09-30","cr":"莫尔国家公园中的天蚕蛾，加纳拉拉班加 (© Robert Thompson/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.Lavaux_ZH-CN1891785892_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"日内瓦湖岸上陡峭的拉沃葡萄园梯田","date":"2020-09-29","cr":"日内瓦湖岸上陡峭的拉沃葡萄园梯田，瑞士 (© Yves Marcoux/plainpicture)"},{"url":"https://www.bing.com/th?id=OHR.GreatBlueShark_ZH-CN1757082635_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"北大西洋亚速尔群岛附近的大青鲨","date":"2020-09-28","cr":"北大西洋亚速尔群岛附近的大青鲨 (© Nuno Sa/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.FraserRiver_ZH-CN1625992097_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"温哥华东部的弗雷泽河和金耳朵山脉","date":"2020-09-27","cr":"温哥华东部的弗雷泽河和金耳朵山脉，加拿大不列颠哥伦比亚省 (© LeonU/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.WatkinsGlen_ZH-CN1271268069_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"沃特金斯格伦州立公园的彩虹瀑布","date":"2020-09-26","cr":"沃特金斯格伦州立公园的彩虹瀑布，纽约州北部芬格湖群 (© Kenneth Keifer/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.LoarreCastle_ZH-CN1136982025_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"洛阿雷城堡","date":"2020-09-25","cr":"洛阿雷城堡，西班牙韦斯卡 (© Sebastian Wasek/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.Almabtrieb_ZH-CN8639425400_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"为牛下山节","date":"2020-09-24","cr":"为牛下山节（即把牛从高山牧场赶回）装饰的牛，奥地利坦海姆塔尔 (© Hans Lippert/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.GoldenGinkgo_ZH-CN8507013452_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"玄武湖公园的金色银杏叶","date":"2020-09-23","cr":"玄武湖公园的金色银杏叶，中国南京 (© SIPA Asia/ZUMA Wire/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.Matamata_ZH-CN8111830275_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"马塔马塔附近的霍比特人村","date":"2020-09-22","cr":"马塔马塔附近的霍比特人村，新西兰北岛 (© 500px Asia/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.DorsetHeather_ZH-CN8284282373_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"斯塔德兰附近荒野上丛生的紫色和粉红色帚石楠","date":"2020-09-21","cr":"斯塔德兰附近荒野上丛生的紫色和粉红色帚石楠，英国多塞特郡 (© allou/iStock/Getty Images Plus)"},{"url":"https://www.bing.com/th?id=OHR.MontereyPup_ZH-CN7914017418_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"海獭妈妈和新生的小狗","date":"2020-09-20","cr":"海獭妈妈和新生的小狗，加利福尼亚蒙特雷湾 (© Suzi Eszterhas/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.PirateSails_ZH-CN7821037852_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"瓦尔内明德的帆船","date":"2020-09-19","cr":"瓦尔内明德的帆船，德国 (© Rico Ködder/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.IcelandicRettir_ZH-CN7738923773_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"为圈羊节准备的冰岛羊","date":"2020-09-18","cr":"为圈羊节准备的冰岛羊 (© Pieter Tytgat/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.MistyVineyard_ZH-CN7642034150_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"波尔多葡萄园","date":"2020-09-17","cr":"波尔多葡萄园，法国 (© agefotostock/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.CityofGuanajuato_ZH-CN7559565626_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"瓜纳华托","date":"2020-09-16","cr":"瓜纳华托，墨西哥 (© AI NISHINO/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.LifeguardEntrance_ZH-CN7394984988_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"日落时分中央海岸入口海滩上的救生员小屋","date":"2020-09-15","cr":"日落时分中央海岸入口海滩上的救生员小屋，澳大利亚新南威尔士州 (© Yury Prokopenko/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.YellowBells_ZH-CN7296699570_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"在食用黄钟花的红喉北蜂鸟","date":"2020-09-14","cr":"在食用黄钟花的红喉北蜂鸟，德克萨斯州丘陵地 (© Rolf Nussbaumer/Danita Delimont)"},{"url":"https://www.bing.com/th?id=OHR.SangreCristoDunes_ZH-CN7193190503_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"以桑格雷－德克里斯托山为背景的沙丘","date":"2020-09-13","cr":"以桑格雷－德克里斯托山为背景的沙丘，科罗拉多州大沙丘国家公园 (© Tim Fitzharris/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.MedievalRocamadour_ZH-CN7063423495_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"罗卡马杜尔","date":"2020-09-12","cr":"罗卡马杜尔，法国 (© Rrrainbow/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.TorontoSky_ZH-CN6932705886_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"日落时的多伦多天际线","date":"2020-09-11","cr":"日落时的多伦多天际线 (© diegograndi/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.KanchanaburiWaterfall_ZH-CN7582684869_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"Khuean Srinagarindra国家公园的Huay Mae Khamin瀑布","date":"2020-09-10","cr":"Khuean Srinagarindra国家公园的Huay Mae Khamin瀑布，泰国 (© ImpaKPro/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.BeardedReedling_ZH-CN7714158275_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"埃尔姆利国家自然保护区里的一只文须雀","date":"2020-09-09","cr":"埃尔姆利国家自然保护区里的一只文须雀，英格兰肯特郡 (© Mark Bridger/Offset by Shutterstock)"},{"url":"https://www.bing.com/th?id=OHR.OttoSettembre_ZH-CN7378112626_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"瓦莱塔","date":"2020-09-08","cr":"瓦莱塔，马耳他 (© Deejpilot/GettyImages)"},{"url":"https://www.bing.com/th?id=OHR.BleistifteFaber_ZH-CN7204563488_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"辉柏嘉展出的铅笔","date":"2020-09-07","cr":"辉柏嘉展出的铅笔，德国施泰因 (© Rüdiger Hess/geo-select FotoArt)"},{"url":"https://www.bing.com/th?id=OHR.LongIsland_ZH-CN7089248815_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"莫尼博克湾的芦苇岛","date":"2020-09-06","cr":"莫尼博克湾的芦苇岛，纽约长岛 (© Claudia Uripos/eStock Photo)"},{"url":"https://www.bing.com/th?id=OHR.BeaverDam_ZH-CN6855160492_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"锯齿国家森林里的海狸坝","date":"2020-09-05","cr":"锯齿国家森林里的海狸坝，爱达荷州 (© Charles Knowles/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.PicoIsland_ZH-CN6719354511_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"一头公牛站在皮库山前的田野中","date":"2020-09-04","cr":"一头公牛站在皮库山前的田野中，亚速尔群岛皮科岛 (© Atmo-Sphere/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.FinancialTowers_ZH-CN6494148642_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"陆家嘴金融贸易区","date":"2020-09-03","cr":"陆家嘴金融贸易区，中国上海 (© Jackal Pan/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.SmithRock_ZH-CN6383276214_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"史密斯洛克州立公园","date":"2020-09-02","cr":"史密斯洛克州立公园，俄勒冈 (© Manuela Durson/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.OysterMushroom_ZH-CN6265453153_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"比利时的平菇","date":"2020-09-01","cr":"比利时的平菇 (© Philippe Clement/Minden Pictures)"}];
+    let currentIndex=0;
+
+    function openLightbox(index){
+      currentIndex=index;
+      const w=items[index];
+      document.getElementById('lb-img').src=w.url;
+      document.getElementById('lb-title').textContent=w.title;
+      document.getElementById('lb-meta').textContent=w.date+' · '+w.cr;
+      document.getElementById('lb-download').href=w.url;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow='hidden';
+    }
+    function navigate(dir){
+      currentIndex=(currentIndex+dir+items.length)%items.length;
+      const w=items[currentIndex];
+      document.getElementById('lb-img').src=w.url;
+      document.getElementById('lb-title').textContent=w.title;
+      document.getElementById('lb-meta').textContent=w.date+' · '+w.cr;
+      document.getElementById('lb-download').href=w.url;
+    }
+    function closeLightbox(){
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow='';
+    }
+    document.addEventListener('keydown',e=>{
+      if(e.key==='Escape')closeLightbox();
+      if(e.key==='ArrowLeft')navigate(-1);
+      if(e.key==='ArrowRight')navigate(1);
+    });
+
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+    },{threshold:0.1});
+    document.querySelectorAll('.card').forEach(c=>observer.observe(c));
+  </script>
+</body>
+</html>

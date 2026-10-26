@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2021-11 必应壁纸</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0a0a0a;color:#e4e4e7}
+    a{color:#a1a1aa;text-decoration:none}a:hover{color:#fafafa}
+
+    .nav{padding:20px clamp(16px,4vw,48px);max-width:1400px;margin:0 auto}
+    .nav a{font-size:.85rem;color:#52525b;transition:color .2s}.nav a:hover{color:#fafafa}
+
+    .section{max-width:1400px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 60px}
+    .section h1{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:#fafafa;margin-bottom:8px}
+    .section .count{font-size:.85rem;color:#52525b;margin-bottom:32px;display:block}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+    .card{position:relative;border-radius:10px;overflow:hidden;cursor:pointer;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s}
+    .card.visible{opacity:1;transform:translateY(0)}
+    .card img{width:100%;display:block;transition:transform .4s}
+    .card:hover img{transform:scale(1.05)}
+    .card .overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,10,10,.8) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:16px;opacity:0;transition:opacity .3s}
+    .card:hover .overlay{opacity:1}
+    .card .overlay .card-title{font-size:.95rem;font-weight:500;color:#fafafa}
+    .card .overlay .card-date{font-size:.8rem;color:#a1a1aa;margin-top:4px}
+
+    .lightbox{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);align-items:center;justify-content:center;cursor:zoom-out}
+    .lightbox.active{display:flex}
+    .lightbox img{max-width:92vw;max-height:88vh;object-fit:contain;border-radius:4px}
+    .lightbox .lb-info{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);text-align:center;color:#a1a1aa}
+    .lightbox .lb-info .lb-title{font-size:1rem;color:#fafafa;margin-bottom:4px}
+    .lightbox .lb-info .lb-meta{font-size:.8rem;color:#71717a}
+    .lightbox .lb-close{position:absolute;top:24px;right:24px;width:40px;height:40px;background:#18181b;border:1px solid #27272a;border-radius:50%;color:#a1a1aa;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .lightbox .lb-close:hover{background:#27272a;color:#fafafa}
+    .lightbox .lb-download{position:absolute;top:24px;right:80px;padding:8px 20px;background:#fafafa;color:#0a0a0a;border-radius:6px;font-size:.85rem;font-weight:500;cursor:pointer;text-decoration:none;transition:all .2s}
+    .lightbox .lb-download:hover{background:#d4d4d8}
+    .lightbox .lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;background:rgba(24,24,27,.7);border:1px solid #3f3f46;border-radius:50%;color:#a1a1aa;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .lightbox .lb-nav:hover{background:#27272a;color:#fafafa}
+    .lightbox .lb-prev{left:20px}
+    .lightbox .lb-next{right:20px}
+
+    @media(max-width:640px){
+      .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+      .card .overlay{opacity:1;background:linear-gradient(0deg,rgba(10,10,10,.7) 0%,transparent 40%)}
+      .lightbox .lb-nav{width:40px;height:40px;font-size:1.1rem}
+      .lightbox .lb-prev{left:8px}
+      .lightbox .lb-next{right:8px}
+    }
+  </style>
+</head>
+<body>
+  <div class="nav"><a href="/">← 返回首页</a></div>
+  <div class="section">
+    <h1>2021-11 必应壁纸</h1>
+    <span class="count">30 张壁纸</span>
+    <div class="grid">
+      <div class="card" onclick="openLightbox(0)">
+        <img src="https://www.bing.com/th?id=OHR.ElephantGiving_ZH-CN9743352473_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="马赛马拉国家保护区中的非洲草原象" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">马赛马拉国家保护区中的非洲草原象</span>
+          <span class="card-date">2021-11-30</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(1)">
+        <img src="https://www.bing.com/th?id=OHR.RainbowMountain_ZH-CN9670076890_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="被白雪覆盖的彩虹山" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">被白雪覆盖的彩虹山</span>
+          <span class="card-date">2021-11-29</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(2)">
+        <img src="https://www.bing.com/th?id=OHR.BeechTrees_ZH-CN9605292244_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="古老的水青冈树" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">古老的水青冈树</span>
+          <span class="card-date">2021-11-28</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(3)">
+        <img src="https://www.bing.com/th?id=OHR.ElanValley_ZH-CN9533069637_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="伊兰谷中的Pen y Garreg水坝" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">伊兰谷中的Pen y Garreg水坝</span>
+          <span class="card-date">2021-11-27</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(4)">
+        <img src="https://www.bing.com/th?id=OHR.WinterWaxwing_ZH-CN9435499385_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="枝头上的太平鸟" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">枝头上的太平鸟</span>
+          <span class="card-date">2021-11-26</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(5)">
+        <img src="https://www.bing.com/th?id=OHR.SquirrelsCairngorms_ZH-CN9369511507_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="凯恩戈姆山国家公园的欧亚红松鼠" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">凯恩戈姆山国家公园的欧亚红松鼠</span>
+          <span class="card-date">2021-11-25</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(6)">
+        <img src="https://www.bing.com/th?id=OHR.ChocoHillBohol_ZH-CN9297094265_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="独特的巧克力山" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">独特的巧克力山</span>
+          <span class="card-date">2021-11-24</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(7)">
+        <img src="https://www.bing.com/th?id=OHR.AmmoniteShell_ZH-CN9232274077_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="菊石亚纲壳体的横截面" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">菊石亚纲壳体的横截面</span>
+          <span class="card-date">2021-11-23</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(8)">
+        <img src="https://www.bing.com/th?id=OHR.IrohazakaRoad_ZH-CN9151363864_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="伊吕波坂山道" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">伊吕波坂山道</span>
+          <span class="card-date">2021-11-22</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(9)">
+        <img src="https://www.bing.com/th?id=OHR.Invergarry_ZH-CN9013535988_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="Invergarry村庄附近的森林" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">Invergarry村庄附近的森林</span>
+          <span class="card-date">2021-11-21</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(10)">
+        <img src="https://www.bing.com/th?id=OHR.FallAssiniboine_ZH-CN8878734090_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="阿西尼博因山公园的秋叶" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">阿西尼博因山公园的秋叶</span>
+          <span class="card-date">2021-11-20</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(11)">
+        <img src="https://www.bing.com/th?id=OHR.LeftForkNorth_ZH-CN8798894034_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="The Subway slot canyon in Zion National Park, Utah" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">The Subway slot canyon in Zion National Park, Utah</span>
+          <span class="card-date">2021-11-19</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(12)">
+        <img src="https://www.bing.com/th?id=OHR.HyacinthMacaws_ZH-CN1191345036_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="潘塔纳尔湿地的风信子金刚鹦鹉" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">潘塔纳尔湿地的风信子金刚鹦鹉</span>
+          <span class="card-date">2021-11-18</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(13)">
+        <img src="https://www.bing.com/th?id=OHR.CorkscrewSwamp_ZH-CN2637396790_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="螺旋沼泽鸟兽禁猎区的小径,佛罗里达州" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">螺旋沼泽鸟兽禁猎区的小径,佛罗里达州</span>
+          <span class="card-date">2021-11-17</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(14)">
+        <img src="https://www.bing.com/th?id=OHR.HogwartsExpress_ZH-CN2774508923_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="穿越格伦菲南高架桥的蒸汽火车" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">穿越格伦菲南高架桥的蒸汽火车</span>
+          <span class="card-date">2021-11-16</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(15)">
+        <img src="https://www.bing.com/th?id=OHR.FloridaManatee_ZH-CN2405291075_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="憨态可掬的海牛, 美国佛罗里达州" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">憨态可掬的海牛, 美国佛罗里达州</span>
+          <span class="card-date">2021-11-15</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(16)">
+        <img src="https://www.bing.com/th?id=OHR.FirstCliff_ZH-CN2308482395_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="第一悬崖步道" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">第一悬崖步道</span>
+          <span class="card-date">2021-11-14</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(17)">
+        <img src="https://www.bing.com/th?id=OHR.ElTajo_ZH-CN2134749418_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="鸟瞰埃尔塔霍峡谷, 西班牙龙达小镇" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">鸟瞰埃尔塔霍峡谷, 西班牙龙达小镇</span>
+          <span class="card-date">2021-11-13</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(18)">
+        <img src="https://www.bing.com/th?id=OHR.BeaversBend_ZH-CN1916035610_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="海狸湾度假公园, 美国俄克拉何马州" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">海狸湾度假公园, 美国俄克拉何马州</span>
+          <span class="card-date">2021-11-12</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(19)">
+        <img src="https://www.bing.com/th?id=OHR.NohsngithiangFalls_ZH-CN1819466830_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="梅加拉亚邦的七姐妹瀑布" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">梅加拉亚邦的七姐妹瀑布</span>
+          <span class="card-date">2021-11-11</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(20)">
+        <img src="https://www.bing.com/th?id=OHR.CumberlandSeashore_ZH-CN1662936356_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="坎伯兰岛国家海岸" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">坎伯兰岛国家海岸</span>
+          <span class="card-date">2021-11-10</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(21)">
+        <img src="https://www.bing.com/th?id=OHR.DalyanTombs_ZH-CN1519154607_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="悬崖上雕刻的古老岩石墓葬" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">悬崖上雕刻的古老岩石墓葬</span>
+          <span class="card-date">2021-11-09</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(22)">
+        <img src="https://www.bing.com/th?id=OHR.ChurchillBears_ZH-CN1430090934_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="好奇地看着相机的北极熊" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">好奇地看着相机的北极熊</span>
+          <span class="card-date">2021-11-08</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(23)">
+        <img src="https://www.bing.com/th?id=OHR.MackArch_ZH-CN1068755647_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="日出时的麦克拱岩" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">日出时的麦克拱岩</span>
+          <span class="card-date">2021-11-07</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(24)">
+        <img src="https://www.bing.com/th?id=OHR.WANumbat_ZH-CN0953446849_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="布鲁克顿的一只雌性袋食蚁兽" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">布鲁克顿的一只雌性袋食蚁兽</span>
+          <span class="card-date">2021-11-06</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(25)">
+        <img src="https://www.bing.com/th?id=OHR.PontRouge_ZH-CN0788212424_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="Pont Rouge" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">Pont Rouge</span>
+          <span class="card-date">2021-11-05</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(26)">
+        <img src="https://www.bing.com/th?id=OHR.FoleysBridge_ZH-CN4338959688_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="托利莫尔森林公园的弗利桥" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">托利莫尔森林公园的弗利桥</span>
+          <span class="card-date">2021-11-04</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(27)">
+        <img src="https://www.bing.com/th?id=OHR.MoonJellyDay_ZH-CN4121466496_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="海月水母和一群无刺的黄金水母" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">海月水母和一群无刺的黄金水母</span>
+          <span class="card-date">2021-11-03</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(28)">
+        <img src="https://www.bing.com/th?id=OHR.CinnamonFernNS_ZH-CN3822051382_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="亡灵节上点缀公墓的万寿菊" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">亡灵节上点缀公墓的万寿菊</span>
+          <span class="card-date">2021-11-02</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(29)">
+        <img src="https://www.bing.com/th?id=OHR.LittleBirds_ZH-CN3637653515_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="海滩上的三趾鹬" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">海滩上的三趾鹬</span>
+          <span class="card-date">2021-11-01</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lb-close" onclick="closeLightbox()" aria-label="关闭">&times;</button>
+    <a class="lb-download" id="lb-download" href="#" target="_blank" rel="noopener" onclick="event.stopPropagation()">查看原图</a>
+    <button class="lb-nav lb-prev" onclick="event.stopPropagation();navigate(-1)" aria-label="上一张">&#8249;</button>
+    <button class="lb-nav lb-next" onclick="event.stopPropagation();navigate(1)" aria-label="下一张">&#8250;</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-info">
+      <div class="lb-title" id="lb-title"></div>
+      <div class="lb-meta" id="lb-meta"></div>
+    </div>
+  </div>
+
+  <script>
+    const items=[{"url":"https://www.bing.com/th?id=OHR.ElephantGiving_ZH-CN9743352473_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"马赛马拉国家保护区中的非洲草原象","date":"2021-11-30","cr":"马赛马拉国家保护区中的非洲草原象，肯尼亚 (© Yva Momatiuk and John Eastcott/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.RainbowMountain_ZH-CN9670076890_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"被白雪覆盖的彩虹山","date":"2021-11-29","cr":"被白雪覆盖的彩虹山，秘鲁 (© Jude Newkirk/Amazing Aerial Agency)"},{"url":"https://www.bing.com/th?id=OHR.BeechTrees_ZH-CN9605292244_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"古老的水青冈树","date":"2021-11-28","cr":"古老的水青冈树，英国北安普顿郡 (© Andrew Baskott/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.ElanValley_ZH-CN9533069637_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"伊兰谷中的Pen y Garreg水坝","date":"2021-11-27","cr":"伊兰谷中的Pen y Garreg水坝，威尔士 (© Joe Daniel Price/Moment Open/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.WinterWaxwing_ZH-CN9435499385_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"枝头上的太平鸟","date":"2021-11-26","cr":"枝头上的太平鸟（北美亚种），加拿大 (© Mircea Costina/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.SquirrelsCairngorms_ZH-CN9369511507_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"凯恩戈姆山国家公园的欧亚红松鼠","date":"2021-11-25","cr":"凯恩戈姆山国家公园的欧亚红松鼠，苏格兰高地 (© Scotland: The Big Picture/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.ChocoHillBohol_ZH-CN9297094265_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"独特的巧克力山","date":"2021-11-24","cr":"独特的巧克力山，菲律宾薄荷岛 (© Danita Delimont/Offset by Shutterstock)"},{"url":"https://www.bing.com/th?id=OHR.AmmoniteShell_ZH-CN9232274077_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"菊石亚纲壳体的横截面","date":"2021-11-23","cr":"菊石亚纲壳体的横截面 (© Marianna Armata/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.IrohazakaRoad_ZH-CN9151363864_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"伊吕波坂山道","date":"2021-11-22","cr":"伊吕波坂山道，日本日光市 (© LightRecords/Shutterstock)"},{"url":"https://www.bing.com/th?id=OHR.Invergarry_ZH-CN9013535988_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"Invergarry村庄附近的森林","date":"2021-11-21","cr":"Invergarry村庄附近的森林，苏格兰 (© Matt Anderson Photography/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.FallAssiniboine_ZH-CN8878734090_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"阿西尼博因山公园的秋叶","date":"2021-11-20","cr":"阿西尼博因山公园的秋叶，加拿大不列颠哥伦比亚省 (© Mitch Pittman/TANDEM Stills + Motion)"},{"url":"https://www.bing.com/th?id=OHR.LeftForkNorth_ZH-CN8798894034_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"The Subway slot canyon in Zion National Park, Utah","date":"2021-11-19","cr":"The Subway slot canyon in Zion National Park, Utah (© Stan Moniz/Tandem Stills + Motion)"},{"url":"https://www.bing.com/th?id=OHR.HyacinthMacaws_ZH-CN1191345036_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"潘塔纳尔湿地的风信子金刚鹦鹉","date":"2021-11-18","cr":"潘塔纳尔湿地的风信子金刚鹦鹉，巴西 (© David Pattyn/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.CorkscrewSwamp_ZH-CN2637396790_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"螺旋沼泽鸟兽禁猎区的小径,佛罗里达州","date":"2021-11-17","cr":"螺旋沼泽鸟兽禁猎区的小径,佛罗里达州 (© Bill Gozansky/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.HogwartsExpress_ZH-CN2774508923_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"穿越格伦菲南高架桥的蒸汽火车","date":"2021-11-16","cr":"穿越格伦菲南高架桥的蒸汽火车，苏格兰因弗内斯郡 (© The Escape of Malee/Shutterstock)"},{"url":"https://www.bing.com/th?id=OHR.FloridaManatee_ZH-CN2405291075_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"憨态可掬的海牛, 美国佛罗里达州","date":"2021-11-15","cr":"憨态可掬的海牛, 美国佛罗里达州 (© Paul E Tessier/Cavan Images/Offset by Shutterstock)"},{"url":"https://www.bing.com/th?id=OHR.FirstCliff_ZH-CN2308482395_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"第一悬崖步道","date":"2021-11-14","cr":"第一悬崖步道，瑞士格林德瓦 (© Hans-Georg Eiben/eStock Photo)"},{"url":"https://www.bing.com/th?id=OHR.ElTajo_ZH-CN2134749418_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"鸟瞰埃尔塔霍峡谷, 西班牙龙达小镇","date":"2021-11-13","cr":"鸟瞰埃尔塔霍峡谷, 西班牙龙达小镇 (© Jude Newkirk/Amazing Aerial Agency)"},{"url":"https://www.bing.com/th?id=OHR.BeaversBend_ZH-CN1916035610_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"海狸湾度假公园, 美国俄克拉何马州","date":"2021-11-12","cr":"海狸湾度假公园, 美国俄克拉何马州 (© Inge Johnsson/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.NohsngithiangFalls_ZH-CN1819466830_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"梅加拉亚邦的七姐妹瀑布","date":"2021-11-11","cr":"梅加拉亚邦的七姐妹瀑布，印度 (© Upamanyoo Das/Shutterstock)"},{"url":"https://www.bing.com/th?id=OHR.CumberlandSeashore_ZH-CN1662936356_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"坎伯兰岛国家海岸","date":"2021-11-10","cr":"坎伯兰岛国家海岸，美国佐治亚州 (© Wilsilver77/Getty Images Plus)"},{"url":"https://www.bing.com/th?id=OHR.DalyanTombs_ZH-CN1519154607_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"悬崖上雕刻的古老岩石墓葬","date":"2021-11-09","cr":"悬崖上雕刻的古老岩石墓葬，土耳其达利安附近 (© Reinhard Schmid/eStock Photo)"},{"url":"https://www.bing.com/th?id=OHR.ChurchillBears_ZH-CN1430090934_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"好奇地看着相机的北极熊","date":"2021-11-08","cr":"好奇地看着相机的北极熊，加拿大丘吉尔镇 (© Matthias Breiter/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.MackArch_ZH-CN1068755647_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"日出时的麦克拱岩","date":"2021-11-07","cr":"日出时的麦克拱岩，俄勒冈南海岸 (© Dennis Frates/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.WANumbat_ZH-CN0953446849_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"布鲁克顿的一只雌性袋食蚁兽","date":"2021-11-06","cr":"布鲁克顿的一只雌性袋食蚁兽，西澳大利亚州 (© Martin Willis/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.PontRouge_ZH-CN0788212424_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"Pont Rouge","date":"2021-11-05","cr":"Pont Rouge (Red Bridge) over the Palmer River in Sainte-Agathe-de-Lotbinière, Quebec, Canada (© Jean Surprenant/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.FoleysBridge_ZH-CN4338959688_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"托利莫尔森林公园的弗利桥","date":"2021-11-04","cr":"托利莫尔森林公园的弗利桥，英国北爱尔兰 (© Adrian McGlynn/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.MoonJellyDay_ZH-CN4121466496_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"海月水母和一群无刺的黄金水母","date":"2021-11-03","cr":"海月水母和一群无刺的黄金水母，印度尼西亚 (© Alex Mustard/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.CinnamonFernNS_ZH-CN3822051382_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"亡灵节上点缀公墓的万寿菊","date":"2021-11-02","cr":"亡灵节上点缀公墓的万寿菊，墨西哥米却肯州 (© Irwin Barrett/Design Pics/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.LittleBirds_ZH-CN3637653515_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"海滩上的三趾鹬","date":"2021-11-01","cr":"海滩上的三趾鹬，法国布列塔尼大区 (© Fabrice Cahez/Minden Pictures)"}];
+    let currentIndex=0;
+
+    function openLightbox(index){
+      currentIndex=index;
+      const w=items[index];
+      document.getElementById('lb-img').src=w.url;
+      document.getElementById('lb-title').textContent=w.title;
+      document.getElementById('lb-meta').textContent=w.date+' · '+w.cr;
+      document.getElementById('lb-download').href=w.url;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow='hidden';
+    }
+    function navigate(dir){
+      currentIndex=(currentIndex+dir+items.length)%items.length;
+      const w=items[currentIndex];
+      document.getElementById('lb-img').src=w.url;
+      document.getElementById('lb-title').textContent=w.title;
+      document.getElementById('lb-meta').textContent=w.date+' · '+w.cr;
+      document.getElementById('lb-download').href=w.url;
+    }
+    function closeLightbox(){
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow='';
+    }
+    document.addEventListener('keydown',e=>{
+      if(e.key==='Escape')closeLightbox();
+      if(e.key==='ArrowLeft')navigate(-1);
+      if(e.key==='ArrowRight')navigate(1);
+    });
+
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+    },{threshold:0.1});
+    document.querySelectorAll('.card').forEach(c=>observer.observe(c));
+  </script>
+</body>
+</html>

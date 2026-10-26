@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2021-12 必应壁纸</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0a0a0a;color:#e4e4e7}
+    a{color:#a1a1aa;text-decoration:none}a:hover{color:#fafafa}
+
+    .nav{padding:20px clamp(16px,4vw,48px);max-width:1400px;margin:0 auto}
+    .nav a{font-size:.85rem;color:#52525b;transition:color .2s}.nav a:hover{color:#fafafa}
+
+    .section{max-width:1400px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 60px}
+    .section h1{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:#fafafa;margin-bottom:8px}
+    .section .count{font-size:.85rem;color:#52525b;margin-bottom:32px;display:block}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+    .card{position:relative;border-radius:10px;overflow:hidden;cursor:pointer;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s}
+    .card.visible{opacity:1;transform:translateY(0)}
+    .card img{width:100%;display:block;transition:transform .4s}
+    .card:hover img{transform:scale(1.05)}
+    .card .overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,10,10,.8) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:16px;opacity:0;transition:opacity .3s}
+    .card:hover .overlay{opacity:1}
+    .card .overlay .card-title{font-size:.95rem;font-weight:500;color:#fafafa}
+    .card .overlay .card-date{font-size:.8rem;color:#a1a1aa;margin-top:4px}
+
+    .lightbox{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);align-items:center;justify-content:center;cursor:zoom-out}
+    .lightbox.active{display:flex}
+    .lightbox img{max-width:92vw;max-height:88vh;object-fit:contain;border-radius:4px}
+    .lightbox .lb-info{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);text-align:center;color:#a1a1aa}
+    .lightbox .lb-info .lb-title{font-size:1rem;color:#fafafa;margin-bottom:4px}
+    .lightbox .lb-info .lb-meta{font-size:.8rem;color:#71717a}
+    .lightbox .lb-close{position:absolute;top:24px;right:24px;width:40px;height:40px;background:#18181b;border:1px solid #27272a;border-radius:50%;color:#a1a1aa;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .lightbox .lb-close:hover{background:#27272a;color:#fafafa}
+    .lightbox .lb-download{position:absolute;top:24px;right:80px;padding:8px 20px;background:#fafafa;color:#0a0a0a;border-radius:6px;font-size:.85rem;font-weight:500;cursor:pointer;text-decoration:none;transition:all .2s}
+    .lightbox .lb-download:hover{background:#d4d4d8}
+    .lightbox .lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;background:rgba(24,24,27,.7);border:1px solid #3f3f46;border-radius:50%;color:#a1a1aa;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .lightbox .lb-nav:hover{background:#27272a;color:#fafafa}
+    .lightbox .lb-prev{left:20px}
+    .lightbox .lb-next{right:20px}
+
+    @media(max-width:640px){
+      .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+      .card .overlay{opacity:1;background:linear-gradient(0deg,rgba(10,10,10,.7) 0%,transparent 40%)}
+      .lightbox .lb-nav{width:40px;height:40px;font-size:1.1rem}
+      .lightbox .lb-prev{left:8px}
+      .lightbox .lb-next{right:8px}
+    }
+  </style>
+</head>
+<body>
+  <div class="nav"><a href="/">← 返回首页</a></div>
+  <div class="section">
+    <h1>2021-12 必应壁纸</h1>
+    <span class="count">31 张壁纸</span>
+    <div class="grid">
+      <div class="card" onclick="openLightbox(0)">
+        <img src="https://www.bing.com/th?id=OHR.IcelandBonfire_ZH-CN9270966209_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="跨年夜的篝火晚会" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">跨年夜的篝火晚会</span>
+          <span class="card-date">2021-12-31</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(1)">
+        <img src="https://www.bing.com/th?id=OHR.WesterheverLight_ZH-CN6827035695_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="星空下的灯塔" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">星空下的灯塔</span>
+          <span class="card-date">2021-12-30</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(2)">
+        <img src="https://www.bing.com/th?id=OHR.OreamnosAmericanus_ZH-CN6731612431_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="育空地区的落基山羊" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">育空地区的落基山羊</span>
+          <span class="card-date">2021-12-29</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(3)">
+        <img src="https://www.bing.com/th?id=OHR.KjellHenriksen_ZH-CN6626275076_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="半球形的谢尔亨里克森天文台" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">半球形的谢尔亨里克森天文台</span>
+          <span class="card-date">2021-12-28</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(4)">
+        <img src="https://www.bing.com/th?id=OHR.SnowBuntings_ZH-CN6554424742_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="暴雪中成群的雪鹀" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">暴雪中成群的雪鹀</span>
+          <span class="card-date">2021-12-27</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(5)">
+        <img src="https://www.bing.com/th?id=OHR.SalehurstChurch_ZH-CN6419013724_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="日光下的村落" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">日光下的村落</span>
+          <span class="card-date">2021-12-26</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(6)">
+        <img src="https://www.bing.com/th?id=OHR.KhomyakMountain_ZH-CN6296455717_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="宛如圣诞精灵的树干" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">宛如圣诞精灵的树干</span>
+          <span class="card-date">2021-12-25</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(7)">
+        <img src="https://www.bing.com/th?id=OHR.Rauchnachte_ZH-CN6061051054_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="湖畔的一棵小圣诞树" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">湖畔的一棵小圣诞树</span>
+          <span class="card-date">2021-12-24</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(8)">
+        <img src="https://www.bing.com/th?id=OHR.ManitobaBears_ZH-CN5877672648_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="两只玩耍的北极熊" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">两只玩耍的北极熊</span>
+          <span class="card-date">2021-12-23</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(9)">
+        <img src="https://www.bing.com/th?id=OHR.AnnecyFrance_ZH-CN5773797252_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="投射在安纳西中皇岛墙上的雪景影像" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">投射在安纳西中皇岛墙上的雪景影像</span>
+          <span class="card-date">2021-12-22</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(10)">
+        <img src="https://www.bing.com/th?id=OHR.SiberianSunset_ZH-CN5711093662_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="西西伯利亚森林中的阳光" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">西西伯利亚森林中的阳光</span>
+          <span class="card-date">2021-12-21</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(11)">
+        <img src="https://www.bing.com/th?id=OHR.QuoichBowl_ZH-CN5583756085_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="Linn of Quoich瀑布旁的碗状岩石洞" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">Linn of Quoich瀑布旁的碗状岩石洞</span>
+          <span class="card-date">2021-12-20</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(12)">
+        <img src="https://www.bing.com/th?id=OHR.AtigunPassAurora_ZH-CN5486073819_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="布鲁克斯山脉上空的极光" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">布鲁克斯山脉上空的极光</span>
+          <span class="card-date">2021-12-19</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(13)">
+        <img src="https://www.bing.com/th?id=OHR.WinterRoofs_ZH-CN5091303265_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="阿尔萨斯的葡萄酒村" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">阿尔萨斯的葡萄酒村</span>
+          <span class="card-date">2021-12-18</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(14)">
+        <img src="https://www.bing.com/th?id=OHR.XmasBeachHuts_ZH-CN6195800613_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="圣诞主题的海滩小屋" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">圣诞主题的海滩小屋</span>
+          <span class="card-date">2021-12-17</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(15)">
+        <img src="https://www.bing.com/th?id=OHR.WernigerodeWeihnachtsmarkt_ZH-CN1081480865_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="韦尼格罗德的圣诞市场" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">韦尼格罗德的圣诞市场</span>
+          <span class="card-date">2021-12-16</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(16)">
+        <img src="https://www.bing.com/th?id=OHR.SantaJusta_ZH-CN0849826455_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="坎塔布里亚的小教堂" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">坎塔布里亚的小教堂</span>
+          <span class="card-date">2021-12-15</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(17)">
+        <img src="https://www.bing.com/th?id=OHR.AmericanRobin_ZH-CN0667508209_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="伫立枝头的旅鸫鸟" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">伫立枝头的旅鸫鸟</span>
+          <span class="card-date">2021-12-14</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(18)">
+        <img src="https://www.bing.com/th?id=OHR.ElPanecilloHill_ZH-CN0527709139_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="暮色中的面包山和老城区" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">暮色中的面包山和老城区</span>
+          <span class="card-date">2021-12-13</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(19)">
+        <img src="https://www.bing.com/th?id=OHR.WickerCultivation_ZH-CN0310713697_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="别致的柳条田野" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">别致的柳条田野</span>
+          <span class="card-date">2021-12-12</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(20)">
+        <img src="https://www.bing.com/th?id=OHR.ShadowEverest_ZH-CN9951649290_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="珠穆朗玛峰的影子" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">珠穆朗玛峰的影子</span>
+          <span class="card-date">2021-12-11</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(21)">
+        <img src="https://www.bing.com/th?id=OHR.FoxDovrefjell_ZH-CN9554491452_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="北极狐" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">北极狐</span>
+          <span class="card-date">2021-12-10</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(22)">
+        <img src="https://www.bing.com/th?id=OHR.GlowWormBMNP_ZH-CN9173680006_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="蓝山国家公园里的萤火虫" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">蓝山国家公园里的萤火虫</span>
+          <span class="card-date">2021-12-09</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(23)">
+        <img src="https://www.bing.com/th?id=OHR.PFNPAZ_ZH-CN7929165864_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="有着丰富石化木材的石化林国家公园" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">有着丰富石化木材的石化林国家公园</span>
+          <span class="card-date">2021-12-08</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(24)">
+        <img src="https://www.bing.com/th?id=OHR.Koenigsbourg_ZH-CN7675452866_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="孚日山脉上的国王城堡" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">孚日山脉上的国王城堡</span>
+          <span class="card-date">2021-12-07</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(25)">
+        <img src="https://www.bing.com/th?id=OHR.MistyTor_ZH-CN7520952555_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="Glastonbury Tor, Somerset, England" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">Glastonbury Tor, Somerset, England</span>
+          <span class="card-date">2021-12-06</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(26)">
+        <img src="https://www.bing.com/th?id=OHR.SalzburgKrampus_ZH-CN7355658592_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="Salzburg with Salzach river, Austria" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">Salzburg with Salzach river, Austria</span>
+          <span class="card-date">2021-12-05</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(27)">
+        <img src="https://www.bing.com/th?id=OHR.MotherCheetah_ZH-CN6992630248_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="Mother cheetah and her cub in the Maasai Mara nature reserve, Kenya" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">Mother cheetah and her cub in the Maasai Mara nature reserve, Kenya</span>
+          <span class="card-date">2021-12-04</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(28)">
+        <img src="https://www.bing.com/th?id=OHR.FrostLeaves_ZH-CN6851974281_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="Autumn leaves coated with frost" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">Autumn leaves coated with frost</span>
+          <span class="card-date">2021-12-03</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(29)">
+        <img src="https://www.bing.com/th?id=OHR.DenaliDall_ZH-CN9952652691_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="迪纳利国家公园里的白大角羊" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">迪纳利国家公园里的白大角羊</span>
+          <span class="card-date">2021-12-02</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(30)">
+        <img src="https://www.bing.com/th?id=OHR.CuvervilleIsland_ZH-CN9814166047_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="库佛维尔岛附近的蓝色冰山" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">库佛维尔岛附近的蓝色冰山</span>
+          <span class="card-date">2021-12-01</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lb-close" onclick="closeLightbox()" aria-label="关闭">&times;</button>
+    <a class="lb-download" id="lb-download" href="#" target="_blank" rel="noopener" onclick="event.stopPropagation()">查看原图</a>
+    <button class="lb-nav lb-prev" onclick="event.stopPropagation();navigate(-1)" aria-label="上一张">&#8249;</button>
+    <button class="lb-nav lb-next" onclick="event.stopPropagation();navigate(1)" aria-label="下一张">&#8250;</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-info">
+      <div class="lb-title" id="lb-title"></div>
+      <div class="lb-meta" id="lb-meta"></div>
+    </div>
+  </div>
+
+  <script>
+    const items=[{"url":"https://www.bing.com/th?id=OHR.IcelandBonfire_ZH-CN9270966209_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"跨年夜的篝火晚会","date":"2021-12-31","cr":"跨年夜的篝火晚会，冰岛雷克雅未克 (© Ragnar Th Sigurdsson/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.WesterheverLight_ZH-CN6827035695_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"星空下的灯塔","date":"2021-12-30","cr":"星空下的灯塔，德国Westerhever镇 (© Sandra Bartocha/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.OreamnosAmericanus_ZH-CN6731612431_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"育空地区的落基山羊","date":"2021-12-29","cr":"育空地区的落基山羊，加拿大 (© Mark Newman/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.KjellHenriksen_ZH-CN6626275076_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"半球形的谢尔亨里克森天文台","date":"2021-12-28","cr":"半球形的谢尔亨里克森天文台，挪威斯瓦尔巴群岛 (© Vincent Fournier/Gallery Stock)"},{"url":"https://www.bing.com/th?id=OHR.SnowBuntings_ZH-CN6554424742_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"暴雪中成群的雪鹀","date":"2021-12-27","cr":"暴雪中成群的雪鹀，美国纽约 (© Marie Read/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.SalehurstChurch_ZH-CN6419013724_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"日光下的村落","date":"2021-12-26","cr":"日光下的村落，英格兰东萨塞克斯郡 (© JohnnyPowell/iStock/Getty Images Plus)"},{"url":"https://www.bing.com/th?id=OHR.KhomyakMountain_ZH-CN6296455717_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"宛如圣诞精灵的树干","date":"2021-12-25","cr":"宛如圣诞精灵的树干，乌克兰喀尔巴阡山脉 (© panaramka/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.Rauchnachte_ZH-CN6061051054_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"湖畔的一棵小圣诞树","date":"2021-12-24","cr":"湖畔的一棵小圣诞树，奥地利魏森湖 (© nagelestock/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.ManitobaBears_ZH-CN5877672648_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"两只玩耍的北极熊","date":"2021-12-23","cr":"两只玩耍的北极熊，加拿大丘吉尔镇 (© Cheryl Ramalho/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.AnnecyFrance_ZH-CN5773797252_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"投射在安纳西中皇岛墙上的雪景影像","date":"2021-12-22","cr":"投射在安纳西中皇岛墙上的雪景影像，法国上萨瓦省 (© blickwinkel/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.SiberianSunset_ZH-CN5711093662_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"西西伯利亚森林中的阳光","date":"2021-12-21","cr":"西西伯利亚森林中的阳光，俄罗斯拉杜日内市附近 (© Leonid Ikan/Shutterstock)"},{"url":"https://www.bing.com/th?id=OHR.QuoichBowl_ZH-CN5583756085_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"Linn of Quoich瀑布旁的碗状岩石洞","date":"2021-12-20","cr":"Linn of Quoich瀑布旁的碗状岩石洞，苏格兰阿伯丁郡 (© AWL Images/Danita Delimont)"},{"url":"https://www.bing.com/th?id=OHR.AtigunPassAurora_ZH-CN5486073819_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"布鲁克斯山脉上空的极光","date":"2021-12-19","cr":"布鲁克斯山脉上空的极光，美国阿拉斯加州 (© Noppawat Tom Charoensinphon/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.WinterRoofs_ZH-CN5091303265_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"阿尔萨斯的葡萄酒村","date":"2021-12-18","cr":"阿尔萨斯的葡萄酒村，法国上莱茵省 (© Walter Bibikow/eStock Photo)"},{"url":"https://www.bing.com/th?id=OHR.XmasBeachHuts_ZH-CN6195800613_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"圣诞主题的海滩小屋","date":"2021-12-17","cr":"圣诞主题的海滩小屋，英国伯恩茅斯 (© Allouphoto/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.WernigerodeWeihnachtsmarkt_ZH-CN1081480865_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"韦尼格罗德的圣诞市场","date":"2021-12-16","cr":"韦尼格罗德的圣诞市场，德国萨克森-安哈尔特州 (© Krzysztof Baranowski/Moment/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.SantaJusta_ZH-CN0849826455_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"坎塔布里亚的小教堂","date":"2021-12-15","cr":"坎塔布里亚的小教堂，西班牙 (© Luis Miguel Martin/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.AmericanRobin_ZH-CN0667508209_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"伫立枝头的旅鸫鸟","date":"2021-12-14","cr":"伫立枝头的旅鸫鸟，加拿大 (© marcophotos/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.ElPanecilloHill_ZH-CN0527709139_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"暮色中的面包山和老城区","date":"2021-12-13","cr":"暮色中的面包山和老城区，厄瓜多尔基多 (© Karol Kozlowski/plainpicture)"},{"url":"https://www.bing.com/th?id=OHR.WickerCultivation_ZH-CN0310713697_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"别致的柳条田野","date":"2021-12-12","cr":"别致的柳条田野，西班牙Cañamares (© David Santiago Garcia/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.ShadowEverest_ZH-CN9951649290_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"珠穆朗玛峰的影子","date":"2021-12-11","cr":"珠穆朗玛峰的影子，尼泊尔喜马拉雅西部 (© Kent Karvey/KH Films, Inc./Tandem Stills + Motion)"},{"url":"https://www.bing.com/th?id=OHR.FoxDovrefjell_ZH-CN9554491452_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"北极狐","date":"2021-12-10","cr":"北极狐，挪威多弗勒山-松达尔国家 (© Andy Trowbridge/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.GlowWormBMNP_ZH-CN9173680006_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"蓝山国家公园里的萤火虫","date":"2021-12-09","cr":"蓝山国家公园里的萤火虫，澳大利亚 (© Leelakajonkij/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.PFNPAZ_ZH-CN7929165864_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"有着丰富石化木材的石化林国家公园","date":"2021-12-08","cr":"有着丰富石化木材的石化林国家公园，美国亚利桑那州 (© Ian Shive/Tandem Stills + Motion)"},{"url":"https://www.bing.com/th?id=OHR.Koenigsbourg_ZH-CN7675452866_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"孚日山脉上的国王城堡","date":"2021-12-07","cr":"孚日山脉上的国王城堡，法国阿尔萨斯 (© Leonid Andronov/Shutterstock)"},{"url":"https://www.bing.com/th?id=OHR.MistyTor_ZH-CN7520952555_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"Glastonbury Tor, Somerset, England","date":"2021-12-06","cr":"Glastonbury Tor, Somerset, England (© DEEPOL by plainpicture/Adam Burton)"},{"url":"https://www.bing.com/th?id=OHR.SalzburgKrampus_ZH-CN7355658592_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"Salzburg with Salzach river, Austria","date":"2021-12-05","cr":"Salzburg with Salzach river, Austria (© MacEaton/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.MotherCheetah_ZH-CN6992630248_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"Mother cheetah and her cub in the Maasai Mara nature reserve, Kenya","date":"2021-12-04","cr":"Mother cheetah and her cub in the Maasai Mara nature reserve, Kenya (© gudkovandrey/Adobe Stock)"},{"url":"https://www.bing.com/th?id=OHR.FrostLeaves_ZH-CN6851974281_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"Autumn leaves coated with frost","date":"2021-12-03","cr":"Autumn leaves coated with frost (© sagarmanis/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.DenaliDall_ZH-CN9952652691_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"迪纳利国家公园里的白大角羊","date":"2021-12-02","cr":"迪纳利国家公园里的白大角羊，阿拉斯加 (© Patrick J. Endres/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.CuvervilleIsland_ZH-CN9814166047_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"库佛维尔岛附近的蓝色冰山","date":"2021-12-01","cr":"库佛维尔岛附近的蓝色冰山，南极洲 (© Mike Hill/Getty Images)"}];
+    let currentIndex=0;
+
+    function openLightbox(index){
+      currentIndex=index;
+      const w=items[index];
+      document.getElementById('lb-img').src=w.url;
+      document.getElementById('lb-title').textContent=w.title;
+      document.getElementById('lb-meta').textContent=w.date+' · '+w.cr;
+      document.getElementById('lb-download').href=w.url;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow='hidden';
+    }
+    function navigate(dir){
+      currentIndex=(currentIndex+dir+items.length)%items.length;
+      const w=items[currentIndex];
+      document.getElementById('lb-img').src=w.url;
+      document.getElementById('lb-title').textContent=w.title;
+      document.getElementById('lb-meta').textContent=w.date+' · '+w.cr;
+      document.getElementById('lb-download').href=w.url;
+    }
+    function closeLightbox(){
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow='';
+    }
+    document.addEventListener('keydown',e=>{
+      if(e.key==='Escape')closeLightbox();
+      if(e.key==='ArrowLeft')navigate(-1);
+      if(e.key==='ArrowRight')navigate(1);
+    });
+
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+    },{threshold:0.1});
+    document.querySelectorAll('.card').forEach(c=>observer.observe(c));
+  </script>
+</body>
+</html>

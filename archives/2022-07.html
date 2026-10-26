@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2022-07 必应壁纸</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0a0a0a;color:#e4e4e7}
+    a{color:#a1a1aa;text-decoration:none}a:hover{color:#fafafa}
+
+    .nav{padding:20px clamp(16px,4vw,48px);max-width:1400px;margin:0 auto}
+    .nav a{font-size:.85rem;color:#52525b;transition:color .2s}.nav a:hover{color:#fafafa}
+
+    .section{max-width:1400px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 60px}
+    .section h1{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:#fafafa;margin-bottom:8px}
+    .section .count{font-size:.85rem;color:#52525b;margin-bottom:32px;display:block}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+    .card{position:relative;border-radius:10px;overflow:hidden;cursor:pointer;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s}
+    .card.visible{opacity:1;transform:translateY(0)}
+    .card img{width:100%;display:block;transition:transform .4s}
+    .card:hover img{transform:scale(1.05)}
+    .card .overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,10,10,.8) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:16px;opacity:0;transition:opacity .3s}
+    .card:hover .overlay{opacity:1}
+    .card .overlay .card-title{font-size:.95rem;font-weight:500;color:#fafafa}
+    .card .overlay .card-date{font-size:.8rem;color:#a1a1aa;margin-top:4px}
+
+    .lightbox{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);align-items:center;justify-content:center;cursor:zoom-out}
+    .lightbox.active{display:flex}
+    .lightbox img{max-width:92vw;max-height:88vh;object-fit:contain;border-radius:4px}
+    .lightbox .lb-info{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);text-align:center;color:#a1a1aa}
+    .lightbox .lb-info .lb-title{font-size:1rem;color:#fafafa;margin-bottom:4px}
+    .lightbox .lb-info .lb-meta{font-size:.8rem;color:#71717a}
+    .lightbox .lb-close{position:absolute;top:24px;right:24px;width:40px;height:40px;background:#18181b;border:1px solid #27272a;border-radius:50%;color:#a1a1aa;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .lightbox .lb-close:hover{background:#27272a;color:#fafafa}
+    .lightbox .lb-download{position:absolute;top:24px;right:80px;padding:8px 20px;background:#fafafa;color:#0a0a0a;border-radius:6px;font-size:.85rem;font-weight:500;cursor:pointer;text-decoration:none;transition:all .2s}
+    .lightbox .lb-download:hover{background:#d4d4d8}
+    .lightbox .lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;background:rgba(24,24,27,.7);border:1px solid #3f3f46;border-radius:50%;color:#a1a1aa;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .lightbox .lb-nav:hover{background:#27272a;color:#fafafa}
+    .lightbox .lb-prev{left:20px}
+    .lightbox .lb-next{right:20px}
+
+    @media(max-width:640px){
+      .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+      .card .overlay{opacity:1;background:linear-gradient(0deg,rgba(10,10,10,.7) 0%,transparent 40%)}
+      .lightbox .lb-nav{width:40px;height:40px;font-size:1.1rem}
+      .lightbox .lb-prev{left:8px}
+      .lightbox .lb-next{right:8px}
+    }
+  </style>
+</head>
+<body>
+  <div class="nav"><a href="/">← 返回首页</a></div>
+  <div class="section">
+    <h1>2022-07 必应壁纸</h1>
+    <span class="count">31 张壁纸</span>
+    <div class="grid">
+      <div class="card" onclick="openLightbox(0)">
+        <img src="https://www.bing.com/th?id=OHR.NoctilucentClouds_ZH-CN4816301354_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="“夜光”云" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">“夜光”云</span>
+          <span class="card-date">2022-07-31</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(1)">
+        <img src="https://www.bing.com/th?id=OHR.FiordlandRainforest_ZH-CN4528847139_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="“第八大奇迹”?" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">“第八大奇迹”?</span>
+          <span class="card-date">2022-07-30</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(2)">
+        <img src="https://www.bing.com/th?id=OHR.FourTigresses_ZH-CN4095017352_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="一种罕见的条纹" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">一种罕见的条纹</span>
+          <span class="card-date">2022-07-29</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(3)">
+        <img src="https://www.bing.com/th?id=OHR.LongsPeak_ZH-CN5927119555_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="雄伟的紫色山峰" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">雄伟的紫色山峰</span>
+          <span class="card-date">2022-07-28</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(4)">
+        <img src="https://www.bing.com/th?id=OHR.NabateanTomb_ZH-CN5770360385_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="孤独的城堡" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">孤独的城堡</span>
+          <span class="card-date">2022-07-27</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(5)">
+        <img src="https://www.bing.com/th?id=OHR.MangroveDay_ZH-CN5590436101_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="被人类遗忘的森林" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">被人类遗忘的森林</span>
+          <span class="card-date">2022-07-26</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(6)">
+        <img src="https://www.bing.com/th?id=OHR.DolbadarnCastle_ZH-CN5397592090_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="守住关口" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">守住关口</span>
+          <span class="card-date">2022-07-25</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(7)">
+        <img src="https://www.bing.com/th?id=OHR.TwoJackLake_ZH-CN4716355677_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="落基山脉中出镜率最高的地方" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">落基山脉中出镜率最高的地方</span>
+          <span class="card-date">2022-07-24</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(8)">
+        <img src="https://www.bing.com/th?id=OHR.FoxgloveHawkmoth_ZH-CN4486704889_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="隐秘的传粉者" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">隐秘的传粉者</span>
+          <span class="card-date">2022-07-23</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(9)">
+        <img src="https://www.bing.com/th?id=OHR.SGIMontenegro_ZH-CN4155831603_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="用誓言打造的岛屿" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">用誓言打造的岛屿</span>
+          <span class="card-date">2022-07-22</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(10)">
+        <img src="https://www.bing.com/th?id=OHR.AbbeyGardens_ZH-CN4831631801_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="绝妙的对称性" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">绝妙的对称性</span>
+          <span class="card-date">2022-07-21</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(11)">
+        <img src="https://www.bing.com/th?id=OHR.MoonPhases_ZH-CN3779272016_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="人类迈出的一大步" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">人类迈出的一大步</span>
+          <span class="card-date">2022-07-20</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(12)">
+        <img src="https://www.bing.com/th?id=OHR.FraueninselChiemsee_ZH-CN3541482552_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="“巴伐利亚海”中的岛屿" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">“巴伐利亚海”中的岛屿</span>
+          <span class="card-date">2022-07-19</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(13)">
+        <img src="https://www.bing.com/th?id=OHR.OmijimaIsland_ZH-CN3328515301_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="海上阿尔卑斯山" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">海上阿尔卑斯山</span>
+          <span class="card-date">2022-07-18</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(14)">
+        <img src="https://www.bing.com/th?id=OHR.CoyoteButtes_ZH-CN3166159419_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="乘风破浪" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">乘风破浪</span>
+          <span class="card-date">2022-07-17</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(15)">
+        <img src="https://www.bing.com/th?id=OHR.AmericanGoldfinch_ZH-CN2996912015_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="“薯片鸟”" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">“薯片鸟”</span>
+          <span class="card-date">2022-07-16</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(16)">
+        <img src="https://www.bing.com/th?id=OHR.Arrone_ZH-CN2794175618_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="时光倒流......" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">时光倒流......</span>
+          <span class="card-date">2022-07-15</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(17)">
+        <img src="https://www.bing.com/th?id=OHR.BabyLemons_ZH-CN4212701834_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="自由自在的柠檬鲨" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">自由自在的柠檬鲨</span>
+          <span class="card-date">2022-07-14</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(18)">
+        <img src="https://www.bing.com/th?id=OHR.BasaltGiants_ZH-CN4038085235_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="巨石中的巨石" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">巨石中的巨石</span>
+          <span class="card-date">2022-07-13</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(19)">
+        <img src="https://www.bing.com/th?id=OHR.SpiralHill_ZH-CN3829252235_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="螺旋上升……" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">螺旋上升……</span>
+          <span class="card-date">2022-07-12</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(20)">
+        <img src="https://www.bing.com/th?id=OHR.BarcelonaPop_ZH-CN3687855585_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="城市规划永不停歇" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">城市规划永不停歇</span>
+          <span class="card-date">2022-07-11</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(21)">
+        <img src="https://www.bing.com/th?id=OHR.OludenizTurkey_ZH-CN3467496108_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="绚丽多彩的海滩" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">绚丽多彩的海滩</span>
+          <span class="card-date">2022-07-10</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(22)">
+        <img src="https://www.bing.com/th?id=OHR.DolomitesMW_ZH-CN3307894335_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="彩虹桥" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">彩虹桥</span>
+          <span class="card-date">2022-07-09</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(23)">
+        <img src="https://www.bing.com/th?id=OHR.PreveliGorge_ZH-CN3109665395_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="值得一去的魅力峡谷" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">值得一去的魅力峡谷</span>
+          <span class="card-date">2022-07-08</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(24)">
+        <img src="https://www.bing.com/th?id=OHR.HecetaHead_ZH-CN2813876594_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="黑夜海岸边的一盏灯" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">黑夜海岸边的一盏灯</span>
+          <span class="card-date">2022-07-07</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(25)">
+        <img src="https://www.bing.com/th?id=OHR.KissingPuffins_ZH-CN2578608262_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="春天是接吻的季节" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">春天是接吻的季节</span>
+          <span class="card-date">2022-07-06</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(26)">
+        <img src="https://www.bing.com/th?id=OHR.FannetteIsland_ZH-CN2395055456_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="这座岛海拔超过一英里" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">这座岛海拔超过一英里</span>
+          <span class="card-date">2022-07-05</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(27)">
+        <img src="https://www.bing.com/th?id=OHR.SharavatiBridge_ZH-CN2011371774_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="工程奇迹" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">工程奇迹</span>
+          <span class="card-date">2022-07-04</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(28)">
+        <img src="https://www.bing.com/th?id=OHR.SummerDogs_ZH-CN1604998367_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="在三伏天遇到一位专家" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">在三伏天遇到一位专家</span>
+          <span class="card-date">2022-07-03</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(29)">
+        <img src="https://www.bing.com/th?id=OHR.HalfwayDay_ZH-CN1333459630_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="一年已过半" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">一年已过半</span>
+          <span class="card-date">2022-07-02</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(30)">
+        <img src="https://www.bing.com/th?id=OHR.AgueroVillage_ZH-CN1007741117_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="走进迷人小村庄" loading="lazy">
+        <div class="overlay">
+          <span class="card-title">走进迷人小村庄</span>
+          <span class="card-date">2022-07-01</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lb-close" onclick="closeLightbox()" aria-label="关闭">&times;</button>
+    <a class="lb-download" id="lb-download" href="#" target="_blank" rel="noopener" onclick="event.stopPropagation()">查看原图</a>
+    <button class="lb-nav lb-prev" onclick="event.stopPropagation();navigate(-1)" aria-label="上一张">&#8249;</button>
+    <button class="lb-nav lb-next" onclick="event.stopPropagation();navigate(1)" aria-label="下一张">&#8250;</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lb-info">
+      <div class="lb-title" id="lb-title"></div>
+      <div class="lb-meta" id="lb-meta"></div>
+    </div>
+  </div>
+
+  <script>
+    const items=[{"url":"https://www.bing.com/th?id=OHR.NoctilucentClouds_ZH-CN4816301354_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"“夜光”云","date":"2022-07-31","cr":"立陶宛的夜光云 (© ljphoto7/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.FiordlandRainforest_ZH-CN4528847139_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"“第八大奇迹”?","date":"2022-07-30","cr":"米尔福德峡湾附近的徒步雨林，新西兰 (© Jim Patterson/Tandem Stills + Motion)"},{"url":"https://www.bing.com/th?id=OHR.FourTigresses_ZH-CN4095017352_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"一种罕见的条纹","date":"2022-07-29","cr":"塔多巴老虎保护区里的老虎四姐妹，印度 (© Ashish Parmar/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.LongsPeak_ZH-CN5927119555_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"雄伟的紫色山峰","date":"2022-07-28","cr":"落基山国家公园的朗斯峰，科罗拉多州 (© Andrew R. Slaton/Tandem Stills + Motion)"},{"url":"https://www.bing.com/th?id=OHR.NabateanTomb_ZH-CN5770360385_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"孤独的城堡","date":"2022-07-27","cr":"玛甸沙勒（也被称为黑格拉）的纳巴泰墓，沙特阿拉伯 (© Tuul & Bruno Morandi/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.MangroveDay_ZH-CN5590436101_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"被人类遗忘的森林","date":"2022-07-26","cr":"萨卢姆三角洲国家公园的红树林，塞内加尔共和国 (© mariusz_prusaczyk/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.DolbadarnCastle_ZH-CN5397592090_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"守住关口","date":"2022-07-25","cr":"兰贝里斯山口脚下的多尔巴达恩城堡，威尔士 (© Viktoria Rodriguez/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.TwoJackLake_ZH-CN4716355677_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"落基山脉中出镜率最高的地方","date":"2022-07-24","cr":"双杰克湖，班夫国家公园，艾伯塔省，加拿大 (© SnapRapid/Offset)"},{"url":"https://www.bing.com/th?id=OHR.FoxgloveHawkmoth_ZH-CN4486704889_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"隐秘的传粉者","date":"2022-07-23","cr":"毛地黄上的红天蛾 (© David Chapman/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.SGIMontenegro_ZH-CN4155831603_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"用誓言打造的岛屿","date":"2022-07-22","cr":"科托尔湾的圣乔治海峡和圣母湾，黑山 (© Dmitrii Sakharov/Shutterstock)"},{"url":"https://www.bing.com/th?id=OHR.AbbeyGardens_ZH-CN4831631801_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"绝妙的对称性","date":"2022-07-21","cr":"伯里圣埃德蒙兹镇的修道院公园，英国萨福克郡 (© Charles Martinez/Amazing Aerial Agency)"},{"url":"https://www.bing.com/th?id=OHR.MoonPhases_ZH-CN3779272016_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"人类迈出的一大步","date":"2022-07-20","cr":"一组月相照片 (© Delpixart/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.FraueninselChiemsee_ZH-CN3541482552_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"“巴伐利亚海”中的岛屿","date":"2022-07-19","cr":"基姆湖上的淑女岛，德国巴伐利亚州 (© Malorny/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.OmijimaIsland_ZH-CN3328515301_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"海上阿尔卑斯山","date":"2022-07-18","cr":"布满奇石的青海岛，日本北长门海岸国定公园 (© Sean Pavone Photo/Adobe Stock)"},{"url":"https://www.bing.com/th?id=OHR.CoyoteButtes_ZH-CN3166159419_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"乘风破浪","date":"2022-07-17","cr":"北狼丘里的\"波浪谷\"，美国亚利桑那州 (© Dennis Frates/Alamy)"},{"url":"https://www.bing.com/th?id=OHR.AmericanGoldfinch_ZH-CN2996912015_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"“薯片鸟”","date":"2022-07-16","cr":"向日葵上的金翅雀，美国南卡罗来纳州 (© Teresa Kopec/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.Arrone_ZH-CN2794175618_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"时光倒流......","date":"2022-07-15","cr":"阿罗内镇的村落，意大利翁布里亚大区 (© Maurizio Rellini/eStock Photo)"},{"url":"https://www.bing.com/th?id=OHR.BabyLemons_ZH-CN4212701834_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"自由自在的柠檬鲨","date":"2022-07-14","cr":"爱丽丝镇附近水域中的柠檬鲨宝宝，巴哈马比米尼岛 (© Ken Kiefer 2/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.BasaltGiants_ZH-CN4038085235_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"巨石中的巨石","date":"2022-07-13","cr":"巨人堤道上的玄武岩柱，英国北爱尔兰 (© Olimpio Fantuz/eStock Photo)"},{"url":"https://www.bing.com/th?id=OHR.SpiralHill_ZH-CN3829252235_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"螺旋上升……","date":"2022-07-12","cr":"悉尼奥林匹克公园里的湾标瞭望台，澳大利亚 (© ai_yoshi/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.BarcelonaPop_ZH-CN3687855585_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"城市规划永不停歇","date":"2022-07-11","cr":"巴塞罗那城市上空，西班牙 (© SW Photography/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.OludenizTurkey_ZH-CN3467496108_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"绚丽多彩的海滩","date":"2022-07-10","cr":"鸟瞰视角下的彩色船只，土耳其欧鲁旦尼斯 (© den-belitsky/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.DolomitesMW_ZH-CN3307894335_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"彩虹桥","date":"2022-07-09","cr":"多洛米蒂山上空的银河，意大利 (© Carlos Fernandez/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.PreveliGorge_ZH-CN3109665395_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"值得一去的魅力峡谷","date":"2022-07-08","cr":"普雷维利峡谷里的河流和棕榈树森林，希腊克里特岛 (© borchee/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.HecetaHead_ZH-CN2813876594_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"黑夜海岸边的一盏灯","date":"2022-07-07","cr":"哈萨塔角灯塔，佛罗伦萨，俄勒冈州 (© Tom Schwabel/Tandem Stills + Motion)"},{"url":"https://www.bing.com/th?id=OHR.KissingPuffins_ZH-CN2578608262_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"春天是接吻的季节","date":"2022-07-06","cr":"一对大西洋海雀在接吻，设得兰群岛，苏格兰 (© Vince Burton/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.FannetteIsland_ZH-CN2395055456_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"这座岛海拔超过一英里","date":"2022-07-05","cr":"被翡翠湾环绕的芬尼特岛，太浩湖，加利福尼亚 (© Rachid Dahnoun/Tandem Stills + Motion)"},{"url":"https://www.bing.com/th?id=OHR.SharavatiBridge_ZH-CN2011371774_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"工程奇迹","date":"2022-07-04","cr":"一列火车穿过卡纳塔克邦的沙拉瓦蒂桥，印度 (© Amith Nag Photography/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.SummerDogs_ZH-CN1604998367_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"在三伏天遇到一位专家","date":"2022-07-03","cr":"赤狐 (© Yossi Eshbol/Minden Pictures)"},{"url":"https://www.bing.com/th?id=OHR.HalfwayDay_ZH-CN1333459630_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"一年已过半","date":"2022-07-02","cr":"分隔两个湖泊的公路，苏格兰高地 (© Abstract Aerial Art/Getty Images)"},{"url":"https://www.bing.com/th?id=OHR.AgueroVillage_ZH-CN1007741117_UHD.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","title":"走进迷人小村庄","date":"2022-07-01","cr":"阿圭罗村庄, 韦斯卡, 西班牙 (© Francesco Carovillano/eStock)"}];
+    let currentIndex=0;
+
+    function openLightbox(index){
+      currentIndex=index;
+      const w=items[index];
+      document.getElementById('lb-img').src=w.url;
+      document.getElementById('lb-title').textContent=w.title;
+      document.getElementById('lb-meta').textContent=w.date+' · '+w.cr;
+      document.getElementById('lb-download').href=w.url;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow='hidden';
+    }
+    function navigate(dir){
+      currentIndex=(currentIndex+dir+items.length)%items.length;
+      const w=items[currentIndex];
+      document.getElementById('lb-img').src=w.url;
+      document.getElementById('lb-title').textContent=w.title;
+      document.getElementById('lb-meta').textContent=w.date+' · '+w.cr;
+      document.getElementById('lb-download').href=w.url;
+    }
+    function closeLightbox(){
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow='';
+    }
+    document.addEventListener('keydown',e=>{
+      if(e.key==='Escape')closeLightbox();
+      if(e.key==='ArrowLeft')navigate(-1);
+      if(e.key==='ArrowRight')navigate(1);
+    });
+
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+    },{threshold:0.1});
+    document.querySelectorAll('.card').forEach(c=>observer.observe(c));
+  </script>
+</body>
+</html>
